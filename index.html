@@ -54,18 +54,7 @@
         }
 
         /* --- NAVBAR --- */
-        .navbar {
-            padding: 1.5rem 0;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 2000;
-            border-bottom: 1px solid var(--border-soft);
-            transition: var(--transition);
-            background: rgba(255, 255, 255, 0.6);
-        }
+       
 
         .navbar.scrolled {
             padding: 0.8rem 0;
@@ -88,7 +77,69 @@
         .logo-text { font-weight: 800; font-size: 1.5rem; letter-spacing: -1.5px; text-transform: uppercase; display: block; }
         .logo-subtext { font-size: 10px; letter-spacing: 4px; display: block; opacity: 0.6; font-weight: 700; margin-top: -4px; text-transform: uppercase; }
         .nav-right { display: flex; gap: 24px; align-items: center; color: var(--text-dark); flex: 1; justify-content: flex-end; }
+/* --- NAVBAR (ÉTAT INITIAL : TRANSPARENT & BLANC) --- */
+.navbar {
+    padding: 1.5rem 0;
+    background: transparent; /* Pas de fond au début */
+    position: fixed;
+    top: 0; 
+    width: 100%; 
+    z-index: 2000;
+    transition: var(--transition);
+    color: #ffffff; /* Texte et icônes en blanc par défaut */
+}
 
+/* --- ÉTAT AU SCROLL (DEVIENT BLANC & NOIR) --- */
+.navbar.scrolled {
+    padding: 0.8rem 0;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid transparent;
+    color: var(--text-dark); /* Le texte passe en noir via l'héritage */
+}
+
+/* On force le changement de couleur pour les éléments spécifiques */
+.navbar.scrolled .logo-center,
+.navbar.scrolled .menu-trigger,
+.navbar.scrolled .nav-right {
+    color: var(--text-dark);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.nav-left { flex: 1; }
+
+/* Couleur héritée pour l'icône menu */
+.menu-trigger { 
+    cursor: pointer; 
+    font-size: 32px !important; 
+    color: inherit; 
+    transition: 0.3s;
+}
+
+.logo-center { 
+    text-align: center; 
+    color: inherit; 
+    flex: 2;
+    transition: var(--transition);
+}
+
+.nav-right { 
+    display: flex; 
+    gap: 24px; 
+    align-items: center; 
+    color: inherit; 
+    flex: 1; 
+    justify-content: flex-end;
+}
         /* --- HERO CONTENT --- */
         .hero-content { 
             position: relative; 
@@ -580,6 +631,10 @@
             <a href="index.html" class="card-link">Accueil</a>
             <a href="donut.html" class="card-link">La Carte</a>
             <a href="panier.html" class="card-link">Mon Panier</a>
+            <a href="histoire.html" class="card-link">Histoire</a>
+            <a href="evenement.html" class="card-link">Evènement</a>
+
+
             <a href="#" class="card-link" style="background: var(--accent-pink); color: white; justify-content: center;">Commander</a>
         </div>
     </div>
@@ -587,7 +642,7 @@
     <div class="hero-content">
         <h1 class="hero-title">L'Éveil des Sens.</h1>
         <p class="hero-subtitle">Découvrez l'alliance parfaite entre haute pâtisserie et gourmandise artisanale. 
-            Des créations uniques préparées chaque matin pour sublimer vos instants d'exception.</p>
+            </p>
         <div class="hero-btns">
             <a href="donut.html" class="btn-primary-solid">Explorer la collection</a>
             <button class="btn-outline-white">
