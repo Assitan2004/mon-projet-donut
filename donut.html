@@ -252,31 +252,277 @@
             .product-grid { grid-template-columns: 1fr; }
             .shop-header h1 { font-size: 2.5rem; }
         }
+        /* --- OPTIMISATION NAV MOBILE --- */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    /* On cache le bouton "Commander" sur mobile pour laisser de la place au logo */
+    .order-now {
+        display: none;
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+    }
+
+    .nav-right {
+        gap: 15px;
+    }
+}
+
+/* --- OPTIMISATION GRILLE PRODUITS --- */
+@media (max-width: 1100px) {
+    .product-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 60px 20px; 
+        padding-bottom: 5rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .product-grid { 
+        grid-template-columns: 1fr; /* Une seule colonne sur petit téléphone */
+        gap: 40px;
+    }
+
+    .shop-header h1 { 
+        font-size: 1.8rem; 
+        margin-bottom: 2rem;
+    }
+
+    /* Défilement horizontal pour les filtres sur mobile */
+    .filter-bar {
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        border-radius: 0;
+        background: transparent;
+        padding: 10px 20px;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .filter-bar::-webkit-scrollbar { display: none; } /* Cache la barre de scroll */
+
+    .filter-item {
+        white-space: nowrap; /* Empêche le texte de revenir à la ligne */
+        background: #F8F8F8;
+        margin-right: 8px;
+    }
+
+    .delivery-options {
+        flex-direction: row;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .opt-btn {
+        flex: 1;
+        padding: 10px 10px;
+        font-size: 0.7rem;
+    }
+}
+
+/* --- AJUSTEMENT DES CARTES PRODUITS --- */
+.product-card {
+    width: 100%;
+}
+
+.image-container {
+    transition: 0.3s ease;
+}
+
+@media (max-width: 480px) {
+    .product-desc {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+    
+    .add-to-cart {
+        width: 90%;
+        justify-content: center;
+    }
+}
+
+.logo-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- LA PETITE CARTE MENU (MODERNE) --- */
+/* --- LA CARTE MENU --- */
+.mobile-nav-card {
+    position: fixed;
+    top: 80px; 
+    left: 20px;
+    width: 260px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    z-index: 2000;
+    padding: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav-card.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.card-inner { display: flex; flex-direction: column; gap: 4px; }
+
+.card-link {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 12px 16px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.order-highlight {
+    background: var(--accent-pink);
+    color: white !important;
+}
+
+.card-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.06);
+    margin: 8px 12px;
+}
+
+/* --- RESPONSIVE LOGIQUE --- */
+.mobile-only { display: none; } /* Caché sur PC */
+.menu-trigger { cursor: pointer; font-size: 32px; }
+
+@media (max-width: 768px) {
+    /* Cache favoris et panier de la barre de droite */
+    .desktop-only { 
+        display: none !important; 
+    }
+    
+    /* Affiche favoris et panier dans la carte menu */
+    .mobile-only { 
+        display: flex; 
+    }
+
+    .nav-container { padding: 0 1.2rem; }
+    .logo-text { font-size: 1.2rem; }
+}
+
+/* --- LOGIQUE RESPONSIVE --- */
+.menu-trigger { cursor: pointer; }
+
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important; /* Cache 'Commander' et 'Coeur' sur mobile */
+    }
+    
+    .nav-container {
+        padding: 0 1.5rem;
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+    }
+}
+
+/* --- LOGIQUE D'AFFICHAGE SMARTPHONE --- */
+
+/* Par défaut, on cache les éléments destinés au menu mobile */
+.mobile-only {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    /* 1. On cache le bouton Commander et le Coeur de la barre principale */
+    .order-now, 
+    .nav-right .material-symbols-outlined:not(:last-child) { 
+        display: none !important; 
+    }
+
+    /* 2. On affiche ces éléments à l'intérieur du Drawer */
+    .mobile-only {
+        display: flex !important;
+    }
+
+    /* Ajustement de la Navbar pour laisser de la place au logo */
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .logo-text {
+        font-size: 1.2rem;
+    }
+}
+
+/* Style spécifique pour le bouton commander dans le menu */
+.order-mobile-btn {
+    color: var(--accent-pink) !important;
+    font-weight: 800;
+}
+
+/* Sécurité pour le scroll sur mobile si le menu est ouvert */
+body.menu-open {
+    overflow: hidden;
+}
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-left">
-                <span class="material-symbols-outlined" style="margin-right: 20px;">menu</span>
-                <a href="#" class="order-now">Commander</a>
-            </div>
-            
-            <div class="logo-center">
-                <span class="logo-text">Homedonut</span>
-                <span class="logo-subtext">Donuts + Café</span>
-            </div>
+<div id="mobileDrawer" class="mobile-nav-card">
+    <div class="card-inner">
+        <a href="panier.html" class="card-link mobile-only">
+            <span class="material-symbols-outlined">shopping_bag</span> Mon Panier
+        </a>
+        <a href="#" class="card-link mobile-only">
+            <span class="material-symbols-outlined">favorite</span> Mes Favoris
+        </a>
 
-            <div class="nav-right">
-                <span class="material-symbols-outlined">favorite</span>
+        <a href="#" class="card-link order-highlight">
+            <span class="material-symbols-outlined">shopping_cart</span> Commander
+        </a>
+        
+        <div class="card-divider"></div>
 
+        <a href="#" class="card-link">Notre Histoire</a>
+        <a href="#" class="card-link">Nos Boutiques</a>
+        <a href="#" class="card-link">Contact</a>
+    </div>
+</div>
 
-                <a href="panier.html" style="color: #1A1A1A;"><span class="material-symbols-outlined">shopping_bag</span></a>
-            </div>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-left">
+            <span class="material-symbols-outlined menu-trigger" id="openBtn">menu</span>
         </div>
-    </nav>
+        
+        <div class="logo-center">
+            <span class="logo-text">Homedonut</span>
+            <span class="logo-subtext">Donuts + Café</span>
+        </div>
 
+        <div class="nav-right">
+            <span class="material-symbols-outlined desktop-only">favorite</span>
+            <a href="panier.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">shopping_bag</span></a>
+            <a href="#" style="color: inherit;"><span class="material-symbols-outlined">person</span></a>
+        </div>
+    </div>
+</nav>
     <header class="shop-header">
       <!--  <h1>Fraîchement glacés.</h1> -->
         
@@ -446,5 +692,21 @@
         
         </main>
 
+        <script>
+const openBtn = document.getElementById('openBtn');
+const drawer = document.getElementById('mobileDrawer');
+
+openBtn.onclick = (e) => {
+    e.stopPropagation(); // Empêche la fermeture immédiate
+    drawer.classList.toggle('active');
+};
+
+// Fermer la carte si on clique n'importe où ailleurs
+document.addEventListener('click', (e) => {
+    if (!drawer.contains(e.target) && e.target !== openBtn) {
+        drawer.classList.remove('active');
+    }
+});
+</script>
 </body>
 </html>
