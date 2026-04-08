@@ -175,28 +175,183 @@
             .action-col { text-align: center; }
             .product-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
+
+/* --- RESPONSIVE PANIER --- */
+
+/* Tablettes (iPad, etc.) */
+@media (max-width: 1024px) {
+    .cart-wrapper {
+        grid-template-columns: 1fr; /* Le résumé passe sous la liste */
+        gap: 30px;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes pour les recos */
+    }
+}
+
+/* Mobiles (Smartphones) */
+@media (max-width: 768px) {
+    .nav-container { padding: 0 1rem; }
+    .logo-text { font-size: 1.2rem; }
+    .back-shop span:not(.material-symbols-outlined) { display: none; } /* Cache le texte "Boutique" */
+
+    .cart-wrapper { margin: 1.5rem auto; padding: 0 1rem; }
+    .cart-header-title { font-size: 1.6rem; margin-bottom: 1.5rem; }
+
+    /* On transforme le tableau en cartes */
+    .cart-table-header { display: none; } /* Cache les titres du tableau */
+
+    .cart-item {
+        grid-template-columns: 1fr; /* Tout sur une colonne */
+        text-align: center;
+        padding: 20px 15px;
+        position: relative;
+    }
+
+    .product-col {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .item-img { width: 120px; height: 120px; margin: 0 auto; }
+
+    .qty-col { margin: 10px 0; }
+    
+    .item-price {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+
+    .action-col {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    /* Ajustement des recommandations */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .recommendations .product-card h3 { font-size: 0.9rem; }
+    .recommendations .image-container { border-radius: 15px; }
+
+    /* Résumé de commande fixe en bas sur mobile (Optionnel mais recommandé) */
+    .summary-container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* Recos sur 1 colonne sur tout petit écran */
+    }
+}
+@media (max-width: 768px) {
+    .update-btn {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+/* --- LA PETITE CARTE MENU (IDENTIQUE) --- */
+.mobile-nav-card {
+    position: fixed;
+    top: 80px; 
+    left: 20px;
+    width: 260px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    z-index: 2000;
+    padding: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav-card.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.card-inner { display: flex; flex-direction: column; gap: 4px; }
+
+.card-link {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 12px 16px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.order-highlight { background: var(--accent-pink); color: white !important; }
+
+.card-divider { height: 1px; background: rgba(0,0,0,0.06); margin: 8px 12px; }
+
+/* --- RESPONSIVE LOGIQUE --- */
+.mobile-only { display: none; }
+.menu-trigger { cursor: pointer; font-size: 32px; }
+
+@media (max-width: 768px) {
+    .desktop-only { display: none !important; }
+    .mobile-only { display: flex; }
+    .nav-container { padding: 0 1.2rem; }
+    .logo-text { font-size: 1.2rem; }
+}
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="page_accueil.html" class="back-shop">
-                <span class="material-symbols-outlined">arrow_back</span> Boutique
-            </a>
-            
-            <div class="logo-center">
-                <span class="logo-text">Homedonut</span>
-                <span class="logo-subtext">Donuts + Café</span>
-            </div>
+   <div id="mobileDrawer" class="mobile-nav-card">
+    <div class="card-inner">
+        <a href="index.html" class="card-link">
+            <span class="material-symbols-outlined">home</span> Accueil
+        </a>
+        <a href="donut.html" class="card-link">
+            <span class="material-symbols-outlined">restaurant_menu</span> La Carte
+        </a>
+        <a href="#" class="card-link mobile-only">
+            <span class="material-symbols-outlined">favorite</span> Mes Favoris
+        </a>
+        <a href="#" class="card-link order-highlight">
+            <span class="material-symbols-outlined">shopping_cart</span> Commander
+        </a>
+        <div class="card-divider"></div>
+        <a href="#" class="card-link">Notre Histoire</a>
+        <a href="#" class="card-link">Contact</a>
+    </div>
+</div>
 
-            <div class="nav-right">
-                <span class="material-symbols-outlined">favorite</span>
-                <span class="material-symbols-outlined">shopping_bag</span>
-            </div>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-left">
+            <span class="material-symbols-outlined menu-trigger" id="openBtn">menu</span>
         </div>
-    </nav>
+        
+        <div class="logo-center">
+            <span class="logo-text">Homedonut</span>
+            <span class="logo-subtext">Donuts + Café</span>
+        </div>
 
+        <div class="nav-right">
+            <span class="material-symbols-outlined desktop-only">favorite</span>
+            <a href="panier.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">shopping_bag</span></a>
+            <a href="#" style="color: inherit;"><span class="material-symbols-outlined">person</span></a>
+        </div>
+    </div>
+</nav>
     <main class="cart-wrapper">
         <section>
             <h1 class="cart-header-title">Votre Panier</h1>
@@ -338,6 +493,20 @@
             </div>
         </section>
     </main>
+<script>
+    const openBtn = document.getElementById('openBtn');
+    const drawer = document.getElementById('mobileDrawer');
 
+    openBtn.onclick = (e) => {
+        e.stopPropagation();
+        drawer.classList.toggle('active');
+    };
+
+    document.addEventListener('click', (e) => {
+        if (!drawer.contains(e.target) && e.target !== openBtn) {
+            drawer.classList.remove('active');
+        }
+    });
+</script>
 </body>
 </html>
