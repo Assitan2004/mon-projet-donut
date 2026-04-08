@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Passion Fruit Cake | Glaze & Tech</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pink: #f43484; /* Votre rose */
+            --text: #1a1a1a;
+            --light-grey: #fff;
+        }
+
+        body {
+            font-family: 'Playfair Display', sans-serif;
+            margin: 0;
+            background: #fff;
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAVIGATION MINIMALISTE */
+        nav {
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* GRID PRINCIPALE */
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 0vh;
+            align-items: center;
+        }
+
+        /* CÔTÉ TEXTE */
+        .info-section {
+            padding: 0 10% 0 15%;
+        }
+
+        .category-tag {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 54px;
+            font-weight: 400;
+            margin: 0 0 10px 0;
+            line-height: 1.1;
+        }
+
+        .vegan-tag {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--text);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .description {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #000;
+            max-width: 450px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* LE BOUTON ROSE (Exactement comme Crosstown) */
+        .order-btn {
+            background: var(--pink);
+            color: white;
+            border: none;
+            padding: 18px 60px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .order-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* CÔTÉ IMAGE */
+        .image-section {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--light-grey); /* Fond très légèrement cassé */
+        }
+
+        .product-image {
+            width: 70%;
+            max-width: 600px;
+            /* L'image doit avoir un fond transparent ou blanc pur */
+        }
+
+        /* FOOTER INFOS (Ingrédients / Allergènes) */
+        .details-footer {
+            padding: 100px 15% 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 50px;
+            border-top: 1px solid #eee;
+        }
+
+        .detail-item h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: #999;
+        }
+
+        .detail-item p {
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 900px) {
+            .product-container { grid-template-columns: 1fr; }
+            .info-section { padding: 50px 20px; order: 2; }
+            .image-section { height: 400px; order: 1; }
+            .details-footer { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="back-btn">← Retour</a>
+    </nav>
+
+    <main class="product-container">
+        
+        <section class="info-section">
+            <span class="category-tag">Donut de Saison</span>
+            <h1>Passion Fruit Cake</h1>
+            <span class="vegan-tag">(v)</span>
+
+            <p class="description">
+                Vivez une explosion de soleil à chaque bouchée. Notre donut signature à la vanille, nappé d'un glaçage vibrant au fruit de la passion avec une pointe de piment de Cayenne pour le caractère. Surmonté d'éclats de cacao croquants.
+            </p>
+
+            <button class="order-btn">Commander </button>
+        </section>
+
+        <section class="image-section">
+            <img src="image/d8.jpg" alt="Passion Fruit Donut" class="product-image">
+        </section>
+
+    </main>
+
+    <footer class="details-footer">
+        <div class="detail-item">
+            <h4>Ingrédients</h4>
+            <p>Pâte à cake vanille, glaçage fruit de la passion maison, éclats de cacao pur, pincée de piment de Cayenne.</p>
+        </div>
+        <div class="detail-item">
+            <h4>Allergènes</h4>
+            <p>Contient : Gluten. Peut contenir des traces de soja et de fruits à coque.</p>
+        </div>
+        <div class="detail-item">
+            <h4>Régime</h4>
+            <p>100% Végétalien (Vegan). Sans produits laitiers ni œufs.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

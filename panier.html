@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Mon Panier | Homedonut</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>
+
+    <style>
+        :root {
+            --accent-pink: #f43484; 
+            --text-dark: #1A1A1A;
+            --text-muted: #888888;
+            --border-color: #E8E8E8;
+            --bg-light: #fafafa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fff; color: var(--text-dark); -webkit-font-smoothing: antialiased; }
+
+        /* --- NAVIGATION D'ORIGINE --- */
+        .navbar {
+            padding: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .back-shop {
+            text-decoration: none;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo-center { text-align: center; }
+        .logo-text { font-weight: 800; font-size: 1.5rem; letter-spacing: -1.5px; text-transform: uppercase; }
+        .logo-subtext { font-size: 10px; letter-spacing: 4px; display: block; opacity: 0.5; font-weight: 700; margin-top: -4px; }
+
+        .nav-right { display: flex; gap: 24px; align-items: center; color: var(--text-dark); }
+
+        /* --- SECTION PANIER --- */
+        .cart-wrapper { max-width: 1300px; margin: 3rem auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 350px; gap: 40px; }
+        .cart-header-title { font-size: 2rem; font-weight: 800; margin-bottom: 2rem; }
+
+        /* TABLEAU DU PANIER */
+        .cart-table-container { border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+        .cart-table-header { display: grid; grid-template-columns: 1fr 150px 150px 80px; padding: 15px 25px; border-bottom: 1px solid var(--border-color); font-size: 0.8rem; font-weight: 700; background: #fff; }
+
+        .cart-item { display: grid; grid-template-columns: 1fr 150px 150px 80px; align-items: center; padding: 20px 25px; border-bottom: 1px solid var(--border-color); background: #fff; }
+        .cart-item:last-child { border-bottom: none; }
+
+        .product-col { display: flex; align-items: center; gap: 20px; }
+        .item-img { width: 90px; height: 90px; background: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .item-img img { width: 70%; object-fit: contain; }
+        .item-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+        .item-info p { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* QUANTITÉ (STYLE IMAGE) */
+        .qty-box { display: flex; align-items: center; justify-content: space-between; border: 1px solid #ccc; border-radius: 100px; padding: 6px 15px; width: 100px; margin: 0 auto; }
+        .qty-btn { cursor: pointer; font-size: 1rem; font-weight: 500; user-select: none; }
+        .qty-num { font-weight: 600; font-size: 0.9rem; }
+
+        .item-price { font-weight: 700; font-size: 1.2rem; text-align: center; }
+        .action-col { text-align: right; }
+        .delete-btn { cursor: pointer; color: var(--text-dark); font-size: 1.2rem; }
+
+        .update-btn { margin-top: 25px; background: #000; color: #fff; border: none; padding: 14px 30px; border-radius: 100px; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
+
+        /* --- RÉSUMÉ (STYLE IMAGE) --- */
+        .summary-container { border: 1px solid var(--border-color); padding: 30px; border-radius: 15px; height: fit-content; background: #fff; }
+        .summary-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 25px; color: #333; }
+
+        .promo-row { display: flex; gap: 10px; margin-bottom: 25px; }
+        .promo-row input { flex: 1; padding: 10px 15px; border-radius: 100px; border: 1px solid #ccc; font-size: 0.8rem; outline: none; }
+        .promo-row button { background: #fff; border: 1px solid #ccc; padding: 0 20px; border-radius: 100px; font-weight: 600; font-size: 0.75rem; cursor: pointer; }
+
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.85rem; font-weight: 600; color: #666; }
+        .summary-line span:last-child { color: #000; font-weight: 700; }
+        
+        .summary-total { margin-top: 20px; padding-top: 20px; display: flex; justify-content: space-between; font-weight: 800; font-size: 1.4rem; align-items: baseline; }
+        .summary-total .currency { font-size: 0.9rem; font-weight: 700; margin-left: 5px; }
+
+        .warranty-box { display: flex; gap: 10px; margin-top: 25px; font-size: 0.7rem; color: #777; line-height: 1.4; }
+        .warranty-box span { font-size: 1rem; color: #444; }
+
+        .checkout-now { width: 100%; background: #000; color: #fff; border: none; padding: 18px; border-radius: 100px; font-weight: 700; font-size: 0.9rem; margin-top: 30px; cursor: pointer; transition: 0.3s; }
+        .checkout-now:hover { opacity: 0.8; }
+
+        /* --- PRODUITS RECOMMANDÉS (DISPOSITION ORIGINALE) --- */
+        .recommendations { grid-column: 1 / -1; margin-top: 80px; padding-bottom: 5rem; }
+        .rec-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 40px; letter-spacing: -1px; }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .product-card {
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: relative;
+            background: #fff;
+            border-radius: 24px;
+        }
+
+        .product-image {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .product-card:hover .product-image { transform: scale(1.1) translateY(-10px); }
+
+        .product-card h3 { font-weight: 700; font-size: 1.1rem; margin-bottom: 6px; }
+        .product-price { font-weight: 800; color: var(--accent-pink); font-size: 1rem; margin-bottom: 12px; }
+        .product-desc { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 20px; max-width: 200px; }
+
+        .add-to-cart {
+            background: var(--text-dark);
+            border: none;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-family: inherit;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .add-to-cart:hover { background: var(--accent-pink); }
+
+        @media (max-width: 992px) {
+            .cart-wrapper { grid-template-columns: 1fr; }
+            .cart-table-header { display: none; }
+            .cart-item { grid-template-columns: 1fr; gap: 15px; text-align: center; }
+            .product-col { flex-direction: column; }
+            .action-col { text-align: center; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="page_accueil.html" class="back-shop">
+                <span class="material-symbols-outlined">arrow_back</span> Boutique
+            </a>
+            
+            <div class="logo-center">
+                <span class="logo-text">Homedonut</span>
+                <span class="logo-subtext">Donuts + Café</span>
+            </div>
+
+            <div class="nav-right">
+                <span class="material-symbols-outlined">favorite</span>
+                <span class="material-symbols-outlined">shopping_bag</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="cart-wrapper">
+        <section>
+            <h1 class="cart-header-title">Votre Panier</h1>
+            
+            <div class="cart-table-container">
+                <div class="cart-table-header">
+                    <span>Produit</span>
+                    <span style="text-align: center;">Quantité</span>
+                    <span style="text-align: center;">Total</span>
+                    <span style="text-align: right;">Action</span>
+                </div>
+
+                <div class="cart-item">
+                    <div class="product-col">
+                        <div class="item-img"><img src="image/d2.jpg" alt="Donut"></div>
+                        <div class="item-info">
+                            <h3>L'Original O.G.</h3>
+                            <p>Glaçage Orxata Signature</p>
+                        </div>
+                    </div>
+                    <div class="qty-col">
+                        <div class="qty-box">
+                            <span class="qty-btn">+</span>
+                            <span class="qty-num">2</span>
+                            <span class="qty-btn">−</span>
+                        </div>
+                    </div>
+                    <div class="item-price">9.00€</div>
+                    <div class="action-col">
+                        <span class="material-symbols-outlined delete-btn">delete</span>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <div class="product-col">
+                        <div class="item-img"><img src="image/d8.jpg" alt="Donut"></div>
+                        <div class="item-info">
+                            <h3>Blueberry Bourbon</h3>
+                            <p>Édition Saisonnière</p>
+                        </div>
+                    </div>
+                    <div class="qty-col">
+                        <div class="qty-box">
+                            <span class="qty-btn">+</span>
+                            <span class="qty-num">1</span>
+                            <span class="qty-btn">−</span>
+                        </div>
+                    </div>
+                    <div class="item-price">5.50€</div>
+                    <div class="action-col">
+                        <span class="material-symbols-outlined delete-btn">delete</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="update-btn">Mettre à jour</button>
+        </section>
+
+        <aside>
+            <div class="summary-container">
+                <h2 class="summary-title">Récapitulatif</h2>
+                
+                <div class="promo-row">
+                    <input type="text" placeholder="Code promo">
+                    <button>Appliquer</button>
+                </div>
+
+                <div class="summary-line">
+                    <span>Sous-total</span>
+                    <span>14.50 EUR</span>
+                </div>
+                <div class="summary-line">
+                    <span>Remise (10%)</span>
+                    <span>-1.45 EUR</span>
+                </div>
+                <div class="summary-line">
+                    <span>Livraison</span>
+                    <span>2.50 EUR</span>
+                </div>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>15.55<span class="currency"> EUR</span></span>
+                </div>
+
+                <div class="warranty-box">
+                    <span class="material-symbols-outlined">verified_user</span>
+                    <p>Qualité Homedonut garantie contre les défauts de fabrication. <a href="#" style="color:#000; font-weight:700;">Détails</a></p>
+                </div>
+
+                <button class="checkout-now">Payer maintenant</button>
+            </div>
+        </aside>
+
+        <section class="recommendations">
+            <h2 class="rec-title">Compléter votre commande</h2>
+            <div class="product-grid">
+                
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="image/d11_modifie.png" class="product-image" alt="Donut">
+                    </div>
+                    <h3>Marshmallow</h3>
+                    <div class="product-price">5.50€</div>
+                    <p class="product-desc">Guimauve fondante et grillée avec croquant.</p>
+                    <button class="add-to-cart">Ajouter</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="image/d7_modifie.png" class="product-image" alt="Donut">
+                    </div>
+                    <h3>Berry Bliss</h3>
+                    <div class="product-price">5.50€</div>
+                    <p class="product-desc">Mélange explosif de fruits rouges.</p>
+                    <button class="add-to-cart">Ajouter</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="image/d9_modifie.png" class="product-image" alt="Donut">
+                    </div>
+                    <h3>Choco Loco</h3>
+                    <div class="product-price">5.50€</div>
+                    <p class="product-desc">Chocolat noir intense et pépites.</p>
+                    <button class="add-to-cart">Ajouter</button>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="image/d3.png" class="product-image" alt="Donut">
+                    </div>
+                    <h3>Vanilla Sky</h3>
+                    <div class="product-price">5.50€</div>
+                    <p class="product-desc">Douceur de vanille et sucre glace.</p>
+                    <button class="add-to-cart">Ajouter</button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
