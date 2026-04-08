@@ -3,63 +3,38 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Glaze & Tech | Pâtisserie Gourmet</title>
+    <title>Homedonut | Pâtisserie Gourmet</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
 
     <style>
-        /* VARIABLES */
         :root {
-            --accent-raspberry: #f43484;
-            --accent-stars: #e8a90a;
+            --accent-pink: #f43484; 
+            --text-dark: #1A1A1A;
             --white: #ffffff;
-            --text-dark: #2D241E;
-            --glass-nav: rgba(255, 255, 255, 0.12);
-            --border-glass: rgba(255, 255, 255, 0.2);
-            --border-soft: #E8E2D9;
+            --border-soft: rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* RESET & BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-font-family: 'Montserrat', sans-serif;
-font-family: "Madera Light", sans-serif;
-            background-color: var(--primary-cream);
-            color: var(--text-main);
-            line-height: 1.5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fff;
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
         }
-h1, h2, h3, .serif {
-    font-family: 'Playfair Display', serif !important;
-    font-weight: 700;        /* Pour un impact fort */
-    letter-spacing: -0.01em; /* Resserrer légèrement les lettres pour un look plus moderne */
-    color: #2D241E;          /* Ton brun foncé actuel qui est très doux */
-}
 
-/* Pour les titres secondaires ou les citations */
-.italic-serif {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 400;
-}        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        button { cursor: pointer; border: none; background: none; font-family: inherit; }
-
-        /* LAYOUT */
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
-
- /* --- HEADER & VIDEO --- */
+        /* --- HEADER & VIDEO --- */
         .hero-section {
             position: relative;
             height: 100vh;
             width: 100%;
             display: flex;
-            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
             overflow: hidden;
-            color: var(--white);
         }
 
         .video-bg { 
@@ -74,1393 +49,619 @@ h1, h2, h3, .serif {
         .header-overlay-dark { 
             position: absolute; 
             inset: 0; 
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%); 
+            background: rgba(0, 0, 0, 0.25); 
             z-index: 0; 
         }
 
         /* --- NAVBAR --- */
         .navbar {
+            padding: 1.5rem 0;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             position: fixed;
-            top: 0; width: 100%;
-            z-index: 1000;
-            padding: 2.5rem 0;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, background 0.4s ease, padding 0.4s ease;
+            top: 0;
+            width: 100%;
+            z-index: 2000;
+            border-bottom: 1px solid var(--border-soft);
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.6);
         }
 
-        .navbar.hide-nav {
-            transform: translateY(-100%);
-            opacity: 0;
-            pointer-events: none;
+        .navbar.scrolled {
+            padding: 0.8rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid #eee;
         }
 
-        /* NAVBAR AU SCROLL : BLANC TRANSPARENT + BLUR */
-       .navbar.scrolled {
-    padding: 0.8rem 0;
-    background: rgba(255, 255, 255, 0.3) !important; /* Blanc très transparent */
-    backdrop-filter: blur(20px) saturate(180%); /* L'effet Glassmorphism */
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-        .nav-container { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            max-width: 1300px; 
-            margin: 0 auto; 
-            padding: 0 2rem; 
-            position: relative;
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
-        
-        .logo-group { display: flex; flex-direction: column; }
-        .logo-text {  font-family: 'Space Grotesk'; 
-            font-size: clamp(2rem, 3vw, 2.5rem); 
-            font-weight: 400; 
-            line-height: 1; 
-            letter-spacing: -3px; 
-            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        color: white;}
-        .logo-subtext { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.7); margin-top: 4px; font-weight: 600; text-transform: uppercase; transition: color 0.3s;}
 
-        .nav-links { display: flex; align-items: center; gap: 1rem; }
-        .nav-item { 
-            text-decoration: none; color: white; font-weight: 600; font-size: 0.85rem; 
-            padding: 10px 20px; border-radius: 100px; background: var(--glass-nav);
-            border: 1px solid var(--border-glass); backdrop-filter: blur(8px); transition: 0.3s;
-        }
-        
-        .contact-btn { background: var(--accent-raspberry); padding: 10px 25px; border-radius: 100px; font-weight: 700; text-decoration: none; color: white; border: none; }
-        .nav-actions { display: flex; align-items: center; gap: 1.2rem; }
-        .icon { font-size: 24px !important; cursor: pointer; color: white; transition: 0.3s; }
-
-        /* HAMBURGER */
-        .burger-icon { display: none; z-index: 2005; cursor: pointer; }
-
-        /* ÉTAT SCROLLÉ : COULEUR DU TEXTE */
-        .navbar.scrolled .logo-text, 
-        .navbar.scrolled .nav-item, 
-        .navbar.scrolled .icon, 
-        .navbar.scrolled .burger-icon { color: #000 !important; }
-        .navbar.scrolled .logo-subtext { color: #555 !important; }
-
-        /* --- MENU MOBILE : PETITE CARTE SUBTILE --- */
-        @media (max-width: 1024px) {
-            .nav-links {
-                position: absolute;
-                top: 100%; 
-                right: 2rem;
-                width: 250px;
-                height: auto;
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px);
-                padding: 1.5rem;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-                border-radius: 20px;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-                opacity: 0;
-                transform: translateY(10px) scale(0.95);
-                pointer-events: none;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 2000;
-            }
-
-            .nav-links.active {
-                opacity: 1;
-                transform: translateY(15px) scale(1);
-                pointer-events: all;
-            }
-
-            .nav-links .nav-item { 
-                color: var(--text-dark) !important; 
-                background: none; 
-                border: none; 
-                font-size: 1rem; 
-                padding: 5px 0;
-                width: 100%;
-                backdrop-filter: none;
-            }
-            
-            .nav-links .contact-btn { width: 100%; text-align: center; }
-            .burger-icon { display: block; }
-        }
+        .nav-left { flex: 1; }
+        .menu-trigger { cursor: pointer; font-size: 32px !important; color: var(--text-dark); transition: 0.3s; }
+        .logo-center { text-align: center; color: var(--text-dark); flex: 2; }
+        .logo-text { font-weight: 800; font-size: 1.5rem; letter-spacing: -1.5px; text-transform: uppercase; display: block; }
+        .logo-subtext { font-size: 10px; letter-spacing: 4px; display: block; opacity: 0.6; font-weight: 700; margin-top: -4px; text-transform: uppercase; }
+        .nav-right { display: flex; gap: 24px; align-items: center; color: var(--text-dark); flex: 1; justify-content: flex-end; }
 
         /* --- HERO CONTENT --- */
         .hero-content { 
-            position: relative; z-index: 10; margin-top: auto; margin-bottom: 5rem;
-            display: flex; flex-direction: column; align-items: flex-start;
-            max-width: 1300px; margin-left: auto; margin-right: auto; padding: 0 2rem; width: 100%;
+            position: relative; 
+            z-index: 10; 
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+            width: 100%;
         }
-        .hero-title {   font-family: 'Space Grotesk'; 
-            font-size: clamp(4rem, 7vw, 5.5rem); 
-            font-weight: 400; 
-            line-height: 1; 
-            margin-bottom: 1.5rem; 
-            letter-spacing: -3px; 
-            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        color: #fff; }
-        .hero-subtitle { font-size: 1.3rem; margin-bottom: 3.5rem; color: rgba(255,255,255,0.9); max-width: 600px; }
-        .hero-btns { display: flex; gap: 1.5rem; margin-bottom: 4rem; }
-        .btn-primary-solid { background: var(--accent-raspberry); color: white; border: none; padding: 18px 40px; border-radius: 100px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
-        .btn-outline-white { backdrop-filter: blur(15px); color: white; border: 2px solid white; padding: 18px 40px; border-radius: 100px; font-weight: 800; display: flex; align-items: center; gap: 10px; cursor: pointer; }
-/* ÉTAT SCROLLÉ : ON GARDE TOUT EN BLANC */
-.navbar.scrolled .logo-text, 
-.navbar.scrolled .nav-item, 
-.navbar.scrolled .icon, 
-.navbar.scrolled .burger-icon { 
-    color: #ffffff !important; /* Force le blanc au lieu du noir (#000) */
-}
-/* --- STYLE PENDANT LE SCROLL (L'ÉPURE) --- */
-.navbar.scrolled .nav-item { 
-    background: transparent !important; /* Enlève le fond */
-    border: 1px solid transparent !important; /* Enlève la bordure */
-    backdrop-filter: none !important; /* Enlève le flou individuel */
-    padding: 15px 15px; /* Resserre un peu l'espace */
-    color: #fff!important; /* Texte noir sur la barre blanche (ou blanc si tu préfères) */
-}
 
-.navbar.scrolled .logo-subtext { 
-    color: rgba(255, 255, 255, 0.6) !important; 
-}
-        /* --- SOCIAL PROOF --- */
-        .social-proof-left { display: flex; align-items: center; gap: 20px; }
-        .avatar-group { display: flex; }
-        .avatar-group img { width: 50px; height: 50px; border-radius: 50%; border: 2.5px solid white; margin-left: -18px; object-fit: cover; }
-        .avatar-group img:first-child { margin-left: 0; }
-        .proof-text-block p { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: white; }
-        .stars-fixed { color: var(--accent-stars); display: flex; align-items: center; gap: 4px; font-size: 0.9rem; }
-        .score-number { color: white; margin-left: 10px; font-weight: 800; }
+        .hero-title { 
+            font-size: clamp(2.5rem, 7vw, 5.5rem); 
+            font-weight: 800;
+            color: #fff; 
+            line-height: 1.1; 
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
 
-        
-        @media (max-width: 1024px) {
-            .hero-btns { flex-direction: column; width: 100%; }
-            .hero-btns button { width: 100%; justify-content: center; }
-            .social-proof-left { flex-direction: column; align-items: flex-start; }
-            .bakery-grid { grid-template-columns: repeat(2, 1fr); }
-        }     
-.category-nav {
-    width: 100%;
-    background: white; /* Fond blanc opaque pour ne pas voir les produits par transparence */
-    
-    /* LE SECRET DU STICKY */
-    position: -webkit-sticky; /* Pour Safari */
-    position: sticky;
-    top: 0; /* Elle se bloque à 0px du haut de l'écran */
-    z-index: 1000; /* Elle passe au-dessus des images de donuts */
-    
-}
+        .hero-subtitle { 
+            font-size: 1.2rem; 
+            color: #fff; 
+            max-width: 650px; 
+            margin: 0 auto 3rem auto; 
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
 
-/* On s'assure que le conteneur principal permet le sticky */
-main.container {
-    position: relative; /* Nécessaire pour définir la zone de scroll du sticky */
-}
+        .hero-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+        .btn-primary-solid { background: var(--accent-pink); color: white; padding: 18px 40px; border-radius: 100px; font-weight: 700; border: none; text-decoration: none; transition: 0.3s; }
+        .btn-outline-white { border: 2px solid white; color: white; padding: 18px 40px; border-radius: 100px; font-weight: 700; display: flex; align-items: center; gap: 10px; cursor: pointer; background: transparent; transition: 0.3s; }
 
-/* Optionnel : cacher la barre si on remonte tout en haut du header */
-header {
-    z-index: 1001; /* Le header repasse devant si on remonte */
-}
-.nav-scroll {
-    display: flex !important;
-    flex-flow: row nowrap !important; /* Force une seule ligne horizontale */
-    justify-content: center; /* Centre les éléments */
-    gap: 1rem;
-    overflow-x: auto; /* Permet le scroll si l'écran est trop petit */
-    scrollbar-width: none;
-    padding: 5px;
-}
+        /* --- GRID & IMAGES --- */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
 
-.nav-scroll::-webkit-scrollbar {
-    display: none;
-}
-
-.cat-item {
-    text-decoration: none;
-    flex-shrink: 0; /* Empêche les cercles de s'écraser */
-}
-
-.cat-circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-   /* color: #6a6363; /* Bleu marine Dunkin */
-        color: #000; /* Bleu marine Dunkin */
-
-    transition: all 0.3s ease;
-}
-
-/* État Actif (Rond plein) */
-.cat-item.active .cat-circle {
-    background-color: #f43484;
-    color: #FFF; /* Jaune/Or pour l'icône et le texte */
-}
-
-.cat-label {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
-    text-transform: lowercase;
-}
-
-.cat-item .material-symbols-outlined {
-    font-size: 30px;
-    font-variation-settings: 'wght' 300;
-}
-
-/* Ajustement pour mobile */
-@media (max-width: 1024px) {
-    .nav-scroll { justify-content: flex-start; }
-}
         .bakery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2.5rem;
         }
+
         .pastry-card {
             background: var(--white);
-          
             overflow: hidden;
+            border-radius: 20px;
+            position: relative;
+            /* Empêche les clics fantômes sur mobile */
+            -webkit-tap-highlight-color: transparent;
         }
-       
+
         .image-container {
             background-color: #fff;
             aspect-ratio: 1/1;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
+
         .pastry-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            padding: 3rem;
+            object-fit: contain;
+            display: block;
             transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        
-        .card-badge {
-            position: absolute;
-            top: 24px;
-            left: 24px;
-            background: #f43484;
-            padding: 4px 12px;
-            border-radius: 99px;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #fff;
-        }
 
-        .floating-ui {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background: white;
-            padding: 12px;
-            padding-left: 32px;
-            border-radius: 99px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            border: 1px solid var(--border-soft);
-            z-index: 100;
-        }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; background: #F9F7F2; margin-left: -12px; }
-        .next-btn {
-            background: var(--accent-terracotta);
-            color: white;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+        /* --- OVERLAY (CACHÉ PAR DÉFAUT) --- */
+        .overlay-voir-plus {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
+            opacity: 0; /* Caché */
+            visibility: hidden;
+            transition: all 0.4s ease;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 5;
         }
 
-        /* Style mis à jour pour les avatars avec images */
-.avatar { 
-    width: 40px; 
-    height: 40px; 
-    border-radius: 50%; 
-    border: 2px solid white; 
-    background: #F9F7F2; 
-    margin-left: -12px; 
-    overflow: hidden; /* Important pour que l'image ne dépasse pas du cercle */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+        .overlay-voir-plus p {
+            font-weight: 700;
+            color: var(--text-dark);
+            transform: translateY(10px);
+            transition: transform 0.4s ease;
+        }
 
-.avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* L'image remplit le cercle sans être déformée */
-    display: block;
-}
-        /* Positionnement du bloc Hero au centre du Header */
-.hero-header-context {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 15; /* Doit être au-dessus de l'overlay */
-    width: 100%;
-    pointer-events: none; /* Permet de cliquer à travers si besoin */
-}
+        .btn-plus {
+            background: var(--text-dark);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
 
-.hero {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    color: white; /* On change en blanc pour le contraste sur l'image */
-}
+        /* AFFICHAGE AU HOVER (PC) ET AU TOUCH (MOBILE) */
+        .pastry-card:hover .overlay-voir-plus,
+        .pastry-card:active .overlay-voir-plus {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .pastry-card:hover .overlay-voir-plus p {
+            transform: translateY(0);
+        }
 
-.hero .label {
-    color: var(--accent-terracotta);
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    display: block;
-}
+        .pastry-card:hover .pastry-image {
+            transform: scale(1.1);
+        }
 
-.hero h2 {
-    font-size: 4.5rem; /* Un peu plus grand pour l'impact */
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Ombre pour la lisibilité */
-}
+        /* --- MOBILE DRAWER --- */
+        .mobile-nav-card {
+            position: fixed;
+            top: 85px; left: 20px;
+            width: 260px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            z-index: 3000;
+            padding: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+        }
+        .mobile-nav-card.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .card-link { text-decoration: none; color: var(--text-dark); font-weight: 600; padding: 12px 16px; border-radius: 16px; display: flex; align-items: center; gap: 12px; }
 
-.hero p {
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 600px;
-    margin: 0 auto;
-    text-shadow: 0 1px 5px rgba(0,0,0,0.3);
-}
-.story-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 80px 0;
-    gap: 50px;
-}
-
-.story-text-content {
-    flex: 1;
-}
-
-.headline {
-    font-size: 2rem;
-    font-weight: 300;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.story-btn {
-    font-size: 12px;
-    color: #888;
-    text-decoration: none;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-    display: inline-block;
-}
-
-.story-image-circle {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-.video-section {
-    padding: 100px 0;
-    background-color: var(--primary-cream);
-}
-
-.video-frame {
-    position: relative;
-    width: 100%;
-    max-width: 1500px; /* La vidéo ne prend plus toute la page */
-    height: 600px;
-    margin: 0 auto;
-    border-radius: 20px; /* Coins arrondis du cadre */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-    background: linear-gradient(to bottom, #a1d9f1, #fbc2eb);
-    /* On ne met PAS overflow: hidden ici pour que les donuts dépassent */
-}
-
-.inner-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 20px; /* Doit correspondre au parent */
-    display: block;
-}
-
-/* Positionnement des objets flottants */
-.decor {
-    position: absolute;
-    z-index: 20;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
-    animation: float 4s ease-in-out infinite;
-}
-
-.decor img {
-    width: 130px; /* Taille des donuts flottants */
-}
-
-/* Placement exact pour dépasser du cadre (comme sur ton image) */
-.asset-top-left { top: -40px; left: 15%; }
-.asset-bottom-right { bottom: -30px; right: 10%; }
-.asset-mid-left { top: 50%; left: -60px; transform: translateY(-50%); }
-
-.video-logo-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-}
-
-.main-logo {
-    width: 60%;
-    max-width: 400px;
-}
-
-.sanitary-banner {
-    position: absolute;
-    bottom: 0; /* On colle la bannière tout en bas du cadre vidéo */
-    width: 100%;
-    text-align: center;
-    z-index: 10;
-}
-
-.sanitary-banner p {
-    background: rgba(255, 255, 255, 0.9); /* Un peu plus opaque pour la lisibilité */
-    display: block; /* On force le bloc pour prendre 100% de la largeur */
-    width: 100%; 
-    padding: 10px 0; /* Un peu plus d'espace vertical */
-    font-size: 11px;
-    color: #000;
-    border-bottom-left-radius: 20px; /* On arrondit pour épouser le cadre vidéo */
-    border-bottom-right-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-/* --- FOOTER ROSE & BLANC --- */
-.site-footer {
-    background-color: var(--accent-raspberry); /* Ton rose #f43484 */
-    color: #ffffff;
-    padding: 100px 0 40px;
-    margin-top: 80px;
-}
-
-.footer-main-content {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 80px;
-    padding-bottom: 80px;
-}
-
-/* Style Logo et Bio */
-.footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #ffffff;
-}
-
-.footer-description {
-    font-size: 15px;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 380px;
-    margin-bottom: 30px;
-}
-
-/* Titres des colonnes */
-.footer-heading {
-    text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 0.15em;
-    margin-bottom: 30px;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 600;
-}
-
-/* Liens du footer */
-.footer-links {
-    list-style: none;
-}
-
-.footer-links li {
-    margin-bottom: 15px;
-}
-
-.footer-links a {
-    color: #ffffff;
-    font-size: 14px;
-    transition: opacity 0.3s;
-}
-
-.footer-links a:hover {
-    opacity: 0.6;
-}
-
-/* Icônes Sociales (Cercles) */
-.social-minimal {
-    display: flex;
-    gap: 15px;
-}
-
-.social-icon {
-    width: 45px;
-    height: 45px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    transition: all 0.3s;
-}
-
-.social-icon:hover {
-    background-color: #ffffff;
-    color: var(--accent-raspberry);
-}
-
-/* Barre de bas de page */
-.footer-bottom-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 30px;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-}
-
-.copyright {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.bottom-legal {
-    display: flex;
-    gap: 30px;
-}
-
-.bottom-legal a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-    .footer-main-content {
-        grid-template-columns: 1fr;
-        gap: 50px;
-        text-align: center;
-    }
-    .footer-description {
-        margin: 0 auto 30px;
-    }
-    .social-minimal {
-        justify-content: center;
-    }
-    .footer-bottom-bar {
-        flex-direction: column;
-        gap: 20px;
-    }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-@media (max-width: 768px) {
-    .full-width-video {
-        height: 350px; /* Plus petit sur mobile */
-    }
-}
-
-/* Responsive pour mobile */
-@media (max-width: 768px) {
-    .story-wrapper {
-        flex-direction: column;
-        text-align: center;
-    }
-    .story-image-circle img {
-        width: 300px;
-        height: 300px;
-    }
-}
-
-/* Version Mobile */
-@media (max-width: 768px) {
-    .story-flex {
-        flex-direction: column-reverse;
-        text-align: center;
-    }
-    .story-text {
-        font-size: 1.6rem;
-        margin: 0 auto 20px;
-    }
-}
-
-/* Ajustement de l'overlay pour qu'il soit un peu plus sombre */
-.header-overlay {
-    background: rgba(0, 0, 0, 0.4); 
-}
-
+        /* --- MEDIA QUERIES --- */
         @media (max-width: 1024px) {
             .bakery-grid { grid-template-columns: repeat(2, 1fr); }
-            nav { display: none; }
         }
-        @media (max-width: 640px) {
+
+        @media (max-width: 768px) {
+            .nav-container { padding: 0 1.2rem; }
+            .hero-title { font-size: 2.8rem; }
             .bakery-grid { grid-template-columns: 1fr; }
-            .hero h2 { font-size: 2.5rem; }
-            header { height: 350px; } /* Un peu plus petit sur mobile */
+            .desktop-only { display: none !important; }
+            
+            /* On s'assure que l'overlay n'est PAS visible par défaut ici */
+            .overlay-voir-plus {
+                opacity: 0;
+                visibility: hidden;
+            }
         }
-/* Styles pour l'overlay "Voir plus" */
-.image-container {
-    position: relative;
-}
-
-.overlay-voir-plus {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff; /* Rose transparent */
-    backdrop-filter: blur(5px); /* Effet de flou */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    flex-direction: column;
-    gap: 9px;
-}
-
-.btn-plus {
-    background: white;
-    color: var(--text-main);
-   padding-bottom: 2px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    transform: translateY(20px);
-    transition: transform 0.4s ease;
-    border-bottom: 1px solid  #888;
-}
-
-.pastry-card:hover .overlay-voir-plus {
-    opacity: 1;
-}
-
-.pastry-card:hover .btn-plus {
-    transform: translateY(0);
-}
-/* --- MOSAÏQUE PLEIN ÉCRAN --- */
-.gallery-full {
-    width: 100%;
-    height:100vh;
-    line-height: 0; /* Supprime l'espace résiduel sous les images */
-    overflow: hidden;
-}
-
-.mosaic-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 images par ligne */
-    grid-template-rows: repeat(2, 1fr);
-    gap: 0; /* Supprime tout espace entre les images */
-    width: 100%;
-    height: 100%; /* Remplit le parent .gallery-full */
-}
-
-.mosaic-item {
-    position: relative;
-    aspect-ratio: 1 / 1; /* Garde les images parfaitement carrées */
-    overflow: hidden;
-    height: 100%; /* Force l'item à prendre toute la hauteur de sa cellule */
-}
-
-.mosaic-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-/* Effet de zoom élégant au survol */
-.mosaic-item:hover img {
-    transform: scale(1.1);
-}
-
-/* Adaptabilité pour tablettes et mobiles */
-@media (max-width: 1024px) {
-    .mosaic-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 images par ligne sur tablette */
-    }
-}
-
-@media (max-width: 480px) {
-    .mosaic-grid {
-        grid-template-columns: repeat(2, 1fr); /* On reste sur 2 pour mobile pour garder le style grille */
-    }
-}
-
-/* --- INFO HIGHLIGHTS --- */
-.info-highlights {
-    padding: 80px 0;
-    background: #fdfaf8;
-    text-align: center;
-}
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-}
-.info-block span {
-    font-size: 40px;
-    color: var(--accent-raspberry);
-    margin-bottom: 20px;
-}
-.info-block h3 {
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-}
-.info-block p {
-    font-size: 14px;
-    color: var(--text-muted);
-}
-
-/* --- FAQ SECTION --- */
+   /* --- SECTION FAQ EN ENTIER --- */
 .faq-section {
     padding: 100px 0;
+    background-color: #fff; /* Fond légèrement grisé pour détacher la section */
 }
+
 .container-small {
     max-width: 800px;
     margin: 0 auto;
     padding: 0 2rem;
 }
-.faq-item {
-    border-bottom: 1px solid var(--border-soft);
+
+/* Titre de la FAQ */
+.faq-section h2.serif {
+    text-align: center;
+    margin-bottom: 50px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
 }
+
+/* Conteneur de chaque question */
+.faq-item {
+    background-color: #ffffff;
+    border-bottom:  1px solid var(--border-soft);
+    border-radius: 16px; /* Bords arrondis modernes */
+    margin-bottom: 5px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: var(--border-soft); /* Bordure rose au survol */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* Style du bouton de la question */
 .faq-question {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 0;
-    font-size: 15px;
-    font-weight: 600;
-    text-align: left;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    color: var(--text-muted);
-    font-size: 15px;
-}
-
-/* Version Mobile */
-@media (max-width: 768px) {
-    .grid-3 { grid-template-columns: 1fr; }
-}
-.overlay-voir-plus p{
-    font-size: 14px;
-}
-/* Ajustement global du Header pour mobile */
-@media (max-width: 768px) {
-    header {
-        height: 100vh; /* Hauteur relative à l'écran plutôt que fixe */
-        min-height: 400px;
-    }
-
-    .header-content {
-        height: 70px;
-        padding: 0 1rem;
-    }
-
-    .logo-group h1 {
-        font-size: 1.2rem;
-    }
-
-    /* On cache le texte "Panier" pour ne garder que l'icône sur petit écran */
-    .cart-btn span:not(.material-symbols-outlined) {
-        display: none;
-    }
-    
-    .cart-btn {
-        padding: 10px;
-        aspect-ratio: 1/1;
-        justify-content: center;
-    }
-}
-@media (max-width: 768px) {
-    .video-frame {
-        height: 800px;
-        border-radius: 10px;
-        width: 100%;
-    }
-    
-    .inner-video {
-        border-radius: 0px;
-    }
-
-    .sanitary-banner p {
-        font-size: 9px;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-}
-/* --- CONFIGURATION BURGER --- */
-.burger-menu {
-    display: none; /* Caché sur PC */
-    flex-direction: column;
-    gap: 6px;
-    z-index: 2000;
-    padding: 10px;
-}
-
-.burger-menu .bar {
-    width: 28px;
-    height: 2px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 2px;
-}
-
-/* --- MENU MOBILE OVERLAY --- */
-.nav-mobile-overlay {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Caché à droite par défaut */
-    width: 80%;
-    height: 100vh;
-    background: var(--text-main);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-    z-index: 1500;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-}
-
-.nav-mobile-overlay.active {
-    right: 0; /* On l'affiche */
-}
-
-.nav-link-mobile {
-    color: white;
-    font-size: 1.5rem;
-    font-family: 'Playfair Display', serif;
+    padding: 25px 30px;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
     font-weight: 700;
+    color: var(--text-dark);
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: color 0.3s ease;
 }
 
-/* --- ANIMATION DU BURGER (CROIX) --- */
-.burger-menu.open .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-.burger-menu.open .bar:nth-child(2) { opacity: 0; }
-.burger-menu.open .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-
-/* --- RESPONSIVE --- */
-@media (max-width: 1024px) {
-    .nav-desktop { display: none; }
-    .burger-menu { display: flex; }
-    
-    /* On ajuste les actions du header pour laisser de la place au burger */
-    .header-actions { gap: 1rem; }
+/* Icône flèche (Expand More) */
+.faq-question .material-symbols-outlined {
+    color: #1A1A1A;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 28px;
 }
 
-/* --- GRILLE PRODUITS HARMONISÉE --- */
-.bakery-grid {
-    display: grid;
-    /* Crée des colonnes de minimum 250px qui s'adaptent à l'écran */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 2rem 0;
+/* État quand la question est ouverte */
+.faq-item.active {
+    border-color: var(--border-soft);
 }
 
-.pastry-card {
-    background: var(--white);
-    transition: transform 0.3s ease;
+.faq-item.active .faq-question {
+    color: #1A1A1A;
 }
 
-.image-container {
-    background-color: #fff; /* Fond neutre si l'image ne remplit pas tout */
-    aspect-ratio: 1 / 1;       /* FORCE UN CARRÉ PARFAIT */
-    position: relative;
+.faq-item.active .material-symbols-outlined {
+    transform: rotate(180deg); /* La flèche se tourne vers le haut */
+}
+
+/* Conteneur de la réponse (Accordéon) */
+.faq-answer {
+    max-height: 0; /* Caché par défaut */
     overflow: hidden;
-    border-radius: 20px;       /* Coins arrondis modernes */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: all 0.5s cubic-bezier(0, 1, 0, 1); /* Animation fluide */
+    background-color: #fff;
 }
 
-.pastry-image {
-    width: 100%;
-    height: 100%;
-    /* 'contain' garde l'image entière sans la couper. 
-       'cover' remplit le carré mais peut couper les bords. */
-    object-fit: contain; 
-    padding: 2rem; /* Espace interne pour que le donut ne touche pas les bords du carré */
-    transition: transform 0.5s ease;
+.faq-answer p {
+    padding: 0 30px 30px 30px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #000;
 }
 
-/* --- RESPONSIVE MOBILE --- */
-@media (max-width: 640px) {
-    .bakery-grid {
-        /* On passe à 2 colonnes sur mobile pour un look "boutique" */
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+/* Quand l'item a la classe active (via JS), on affiche la réponse */
+.faq-item.active .faq-answer {
+    max-height: 500px; /* Hauteur max suffisante pour le contenu */
+    transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+}
+
+/* RESPONSIVE FAQ */
+@media (max-width: 768px) {
+    .faq-section {
+        padding: 60px 0;
     }
     
-    .pastry-image {
-        padding: 1rem; /* Moins d'espace interne sur mobile */
+    .faq-section h2.serif {
+        font-size: 2rem;
     }
 
-    .overlay-voir-plus p {
-        font-size: 11px;
+    .faq-question {
+        padding: 20px;
+        font-size: 1rem;
+    }
+
+    .faq-answer p {
+        padding: 0 20px 20px 20px;
+        font-size: 0.95rem;
     }
 }
-/* Cache tous les produits du catalogue au démarrage */
-#main-catalogue .pastry-card {
-    display: none;
+
+/* --- FOOTER STYLE --- */
+.site-footer {
+    background-color: var(--text-dark); /* Fond noir/anthracite */
+    color: #ffffff;
+    padding: 80px 0 40px;
+    margin-top: 50px;
 }
 
-/* Affiche uniquement les donuts au démarrage */
-#main-catalogue .pastry-card[data-category="donuts"] {
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-logo .logo-text {
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: -1.5px;
     display: block;
 }
-/* --- LOGO IMAGE : CENTRAGE ET COMPORTEMENT --- */
-.logo-link {
+
+.footer-logo .logo-subtext {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.footer-desc {
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    font-size: 14px;
+    max-width: 320px;
+}
+
+.footer-heading {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: var(--accent-pink); /* Rose Homedonut */
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #fff;
+    padding-left: 5px;
+}
+
+.newsletter-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    border-radius: 50px;
+    color: #fff;
+    outline: none;
+    margin-bottom: 15px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.btn-footer-news {
+    width: 100%;
+    background: var(--accent-pink);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-footer-news:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-legal a {
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+}
+
+.footer-legal a:hover {
+    color: #fff;
+}
+
+/* RESPONSIVE FOOTER */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+/* --- ADRESSE --- */
+.footer-address {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centre parfaitement le logo dans la navbar */
-    text-decoration: none;
-    transition: var(--transition);
+    gap: 10px;
+    margin-top: 25px;
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
 }
 
-.main-logo {
-    height: 70px; /* Taille généreuse du logo quand le header est transparent */
-    width: auto;
-    object-fit: contain; /* Garde les proportions de ton logo */
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    /* Optionnel : ajoute une ombre subtile pour la visibilité sur la vidéo */
-    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.2)); 
+.footer-address .material-symbols-outlined {
+    color: var(--accent-pink);
+    font-size: 20px;
 }
 
-/* --- LOGO AU SCROLL (Header Blanc) --- */
-/* Le logo rétrécit et devient plus discret */
-.navbar.scrolled .main-logo {
-    height: 100px; /* Taille réduite au scroll */
-    filter: none; /* Enlève l'ombre portée sur fond blanc */
+/* --- RÉSEAUX SOCIAUX --- */
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
 }
 
-/* --- RESPONSIVE MOBILE (Petit écran) --- */
-@media (max-width: 768px) {
-    .main-logo {
-        height: 100px; /* Plus petit sur mobile par défaut */
-    }
-    .navbar.scrolled .main-logo {
-        height: 100px; /* Encore plus petit au scroll sur mobile */
-    }
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #fff !important;
+    transition: all 0.3s ease;
 }
+
+.social-link:hover {
+    background: var(--accent-pink);
+    transform: translateY(-3px);
+}
+
+/* Important : Si tu n'as pas FontAwesome pour les icônes TikTok/Snapchat, 
+   ajoute ce lien dans ton <head> : 
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+*/
     </style>
 </head>
 <body>
 
 <header class="hero-section">
-    <video autoplay muted loop playsinline class="video-bg" id="heroVideo">
-        <source src="image/header.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="image/donut.mp4" type="video/mp4">
     </video>
     <div class="header-overlay-dark"></div>
 
     <nav class="navbar" id="mainNavbar">
         <div class="nav-container">
-          <a href="#" class="logo-link">
-    <img src="image/logo_1.png" alt="HomeDonut Pâtisserie Gourmet Logo" class="main-logo">
-</a>
-            
-            
-            <div class="nav-links" id="navMenu">
-                <a href="#" class="nav-item">La Collection</a>
-                <a href="#" class="nav-item">Evenements</a>
-                <a href="#" class="nav-item">Notre Histoire</a>
+            <div class="nav-left">
+                <span class="material-symbols-outlined menu-trigger" id="openBtn">menu</span>
             </div>
-
-            <div class="nav-actions">
-                <span class="material-symbols-outlined icon">search</span>
-
-       <a href="panier.html"> <span class="material-symbols-outlined">shopping_bag</span></a>      
-
-                <span class="material-symbols-outlined icon burger-icon" id="burgerBtn">menu</span>
+            <div class="logo-center">
+                <span class="logo-text">Homedonut</span>
+                <span class="logo-subtext">Donuts + Café</span>
+            </div>
+            <div class="nav-right">
+                <span class="material-symbols-outlined desktop-only">favorite</span>
+                <a href="panier.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">shopping_bag</span></a>
+                <a href="#" style="color: inherit;"><span class="material-symbols-outlined">person</span></a>
             </div>
         </div>
     </nav>
 
-    <div class="hero-content">
-        <h1 class="hero-title">L'art du glaçage.</h1>
-        <p class="hero-subtitle">Pâtisseries artisanales haute couture, livrées chez vous pour chaque moment d'exception.</p>
-        <div class="hero-btns">
-            <button class="btn-primary-solid"><a href="donut.html">Découvrir la carte</a></button>
-            <button class="btn-outline-white">
-                <span class="material-symbols-outlined">play_circle</span> Voir la démo
-            </button>
+    <div id="mobileDrawer" class="mobile-nav-card">
+        <div class="card-inner">
+            <a href="index.html" class="card-link">Accueil</a>
+            <a href="donut.html" class="card-link">La Carte</a>
+            <a href="panier.html" class="card-link">Mon Panier</a>
+            <a href="#" class="card-link" style="background: var(--accent-pink); color: white; justify-content: center;">Commander</a>
         </div>
+    </div>
 
-        <div class="social-proof-left">
-            <div class="avatar-group">
-                <img src="image/d5.jpg" alt="1"><img src="image/h1.jpg" alt="2"><img src="image/cake.jpg" alt="3">
-            </div>
-            <div class="proof-text-block">
-                <p>Déjà +10,000 gourmands conquis</p>
-                <div class="stars-fixed">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    <span class="score-number">4.9/5</span>
-                </div>
-            </div>
+    <div class="hero-content">
+        <h1 class="hero-title">L'Éveil des Sens.</h1>
+        <p class="hero-subtitle">Découvrez l'alliance parfaite entre haute pâtisserie et gourmandise artisanale. 
+            Des créations uniques préparées chaque matin pour sublimer vos instants d'exception.</p>
+        <div class="hero-btns">
+            <a href="donut.html" class="btn-primary-solid">Explorer la collection</a>
+            <button class="btn-outline-white">
+                <span class="material-symbols-outlined">play_circle</span> Notre savoir-faire
+            </button>
         </div>
     </div>
 </header>
 
+<main class="container" style="padding: 4rem 2rem;">
+    <h2 style="text-align: center; margin-bottom: 3rem; font-weight: 800; font-size: 2rem;">Best sellers</h2>
 
-<main class="container" style="padding-top: 4rem; padding-bottom: 4rem;">
-    
-
-<div class="category-nav">
-    <div class="container nav-scroll">
-    <a href="javascript:void(0)"  class="cat-item active" data-filter="donuts">
-            <div class="cat-circle">
-                <span class="material-symbols-outlined">donut_small</span>
-                <span class="cat-label">donuts</span>
+    <div class="bakery-grid">
+        <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d11_modifie.png" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Donuts Mms</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
             </div>
-        </a>
-
-
-        <a href="javascript:void(0)" class="cat-item " data-filter="bento-cake">
-    <div class="cat-circle">
-        <span class="material-symbols-outlined">cake</span>
-        <span class="cat-label">bento cake</span>
-    </div>
-</a>
-
+        </div>
         
-
-        <a href="javascript:void(0)" class="cat-item" data-filter="salés">
-            <div class="cat-circle">
-                <span class="material-symbols-outlined">lunch_dining</span>
-                <span class="cat-label">salés</span>
+        <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d2.jpg" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Matcha Zen</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
             </div>
-        </a>
+        </div>
 
-        <a href="javascript:void(0)" class="cat-item" data-filter="milkshakes">
-    <div class="cat-circle">
-        <span class="material-symbols-outlined">local_drink</span>
-        <span class="cat-label">milkshakes</span>
-    </div>
-</a>
-        <a href="javascript:void(0)" class="cat-item" data-filter="bubble-tea">
-            <div class="cat-circle">
-                <span class="material-symbols-outlined">bubble_chart</span>
-                <span class="cat-label">bubble tea</span>
+        <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d7_modifie.png" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Honey Glaze</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
             </div>
-        </a>
-    </div>
-</div>
+        </div>
 
-<hr style="border: 0; border-top: 1px solid #fff; margin: 4rem 0;">
-<div class="bakery-grid" id="main-catalogue">
-    
-    <div class="pastry-card" data-category="donuts">
-        <div class="image-container">
-            <img src="image/d11_modifie.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Donut M&Ms</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
+          <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d11_modifie.png" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Donuts Mms</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="pastry-card" data-category="donuts">
-        <div class="image-container">
-            <img src="image/d2.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Matcha Zen</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
+        
+        <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d2.jpg" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Matcha Zen</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="pastry-card" data-category="donuts">
-        <div class="image-container">
-            <img src="image/d3.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Honey Glaze</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="donuts">
-        <div class="image-container">
-            <img src="image/d7_modifie.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Choco Loco</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="donuts">
-        <div class="image-container">
-            <img src="image/d8.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Pink Dream</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="donuts">
-        <div class="image-container">
-            <img src="image/d9_modifie.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Speculoos Crush</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
 
-    <div class="pastry-card" data-category="bento-cake">
-        <div class="image-container">
-            <img src="image/C1.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Bento Fraise</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="bento-cake">
-        <div class="image-container">
-            <img src="image/c5.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Bento Chocolat</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="bento-cake">
-        <div class="image-container">
-            <img src="image/c6-removebg-preview.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Bento Vanille</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="bento-cake">
-        <div class="image-container">
-            <img src="image/c3.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Bento Red Velvet</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="bento-cake">
-        <div class="image-container">
-            <img src="image/C4.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Bento Pistache</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="bento-cake">
-        <div class="image-container">
-            <img src="image/c2.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Bento Caramel</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-
-    <div class="pastry-card" data-category="salés">
-        <div class="image-container">
-            <img src="image/s1.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Bagel Saumon</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="salés">
-        <div class="image-container">
-            <img src="image/s2.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Bagel Pastrami</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="salés">
-        <div class="image-container">
-            <img src="image/s3.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Focaccia Romarin</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="salés">
-        <div class="image-container">
-            <img src="image/s4.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Donut Salé Bacon</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="salés">
-        <div class="image-container">
-            <img src="image/s5.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Club Sandwich</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="salés">
-        <div class="image-container">
-            <img src="image/s6.png" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Croque Gourmet</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-
-    <div class="pastry-card" data-category="milkshakes">
-        <div class="image-container">
-            <img src="image/M1.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Shake Oreo</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="milkshakes">
-        <div class="image-container">
-            <img src="image/M1.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Shake Fraise</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="milkshakes">
-        <div class="image-container">
-            <img src="image/M1.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Shake Kinder</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="milkshakes">
-        <div class="image-container">
-            <img src="image/M1.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Shake Caramel</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="milkshakes">
-        <div class="image-container">
-            <img src="image/M1.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Shake Vanille</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="milkshakes">
-        <div class="image-container">
-            <img src="image/M1.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Shake Spéculoos</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-
-    <div class="pastry-card" data-category="bubble-tea">
-        <div class="image-container">
-            <img src="image/bt.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Brown Sugar</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="bubble-tea">
-        <div class="image-container">
-            <img src="image/bt1.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Taro Milk</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="bubble-tea">
-        <div class="image-container">
-            <img src="image/bt.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Passion Fruit</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="bubble-tea">
-        <div class="image-container">
-            <img src="image/bt.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Mango Popping</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="bubble-tea">
-        <div class="image-container">
-            <img src="image/bt.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Matcha Boba</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-    <div class="pastry-card" data-category="bubble-tea">
-        <div class="image-container">
-            <img src="image/bt.jpg" class="pastry-image">
-            <div class="overlay-voir-plus"><p>Litchi Lyfe</p><a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a></div>
-        </div>
-    </div>
-</div>
-
-<h2 style="text-align: center;padding-top:22px;font-weight: 700;font-size: 28px;padding-bottom: 22px;letter-spacing: -0.01em;">Best sellers</h2>
-
-<div class="bakery-grid">
-    <div class="pastry-card">
-        <div class="image-container">
-            <img src="image/d11_modifie.png" class="pastry-image" alt="Donut" style="width: 430px;">
-            <div class="overlay-voir-plus">
-                <p>Donuts Mms</p>
-                <a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a>
+        <div class="pastry-card">
+            <div class="image-container">
+                <img src="image/d8.jpg" class="pastry-image" alt="Donut">
+                <div class="overlay-voir-plus">
+                    <p>Honey Glaze</p>
+                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
+                </div>
             </div>
         </div>
     </div>
-    
-    <div class="pastry-card">
-        <div class="image-container">
-            <img src="image/d2.jpg" class="pastry-image" alt="Donut Matcha" style="width: 430px;">
-            <div class="overlay-voir-plus">
-                <p>Matcha Zen</p>
-                <a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="pastry-card">
-        <div class="image-container">
-            <img src="image/d3.png" class="pastry-image" alt="Donut Miel">
-            <div class="overlay-voir-plus">
-                <p>Honey Glaze</p>
-                <a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="pastry-card">
-        <div class="image-container">
-            <img src="image/d7_modifie.png" class="pastry-image" alt="Donut" style="width: 430px;">
-            <div class="overlay-voir-plus">
-                <p>Choco Loco</p>
-                <a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="pastry-card">
-        <div class="image-container">
-            <img src="image/d8.jpg" class="pastry-image" alt="Donut Matcha" style="width: 430px;">
-            <div class="overlay-voir-plus">
-                <p>Pink Dream</p>
-                <a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="pastry-card">
-        <div class="image-container">
-            <img src="image/d9_modifie.png" class="pastry-image" alt="Donut Miel" style="width: 470px;">
-            <div class="overlay-voir-plus">
-                <p>Speculoos Crush</p>
-                <a href="detail_produit.html" class="btn-plus" style="text-decoration: none;">Voir plus</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 </main>
-
-<div class="floating-ui">
-    <div class="cart-avatars" style="display: flex; align-items: center; padding-left: 12px;">
-        <div class="avatar">
-            <img src="image/d11_modifie.png" alt="Donut 1">
-        </div>
-        <div class="avatar">
-            <img src="image/d2.jpg" alt="Donut 2">
-        </div>
-    </div>
-    
-    <div style="text-align: right">
-        <p style="font-size: 9px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin: 0;">Total</p>
-        <p class="serif" style="font-weight: 700; margin: 0;">14.00€</p>
-    </div>
-    
-    <button class="next-btn">
-        <span class="material-symbols-outlined">arrow_forward</span>
-    </button>
-</div>
-
 <section class="faq-section">
     <div class="container-small">
         <h2 class="serif">Questions Fréquentes</h2>
@@ -1506,156 +707,104 @@ header {
         </div>
     </div>
 </section>
-<section class="video-section">
-    <div class="container">
-        <div class="video-frame">
-            
-            <video autoplay muted loop playsinline class="inner-video">
-                <source src="image/header.mp4" type="video/mp4">
-            </video>
-
-         
-           
-
-            <div class="sanitary-banner">
-                <p>Pour votre santé, mangez au moins cinq fruits et légumes par jour. www.mangerbouger.fr</p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <footer class="site-footer">
     <div class="container">
-        <div class="footer-main-content">
-            <div class="footer-column bio-col">
-                <h2 class="footer-logo">Glaze & Tech</h2>
-                <p class="footer-description">
-                    Our philosophy centers on the purity of ingredients and the precision of the bake. From our flour mill to your table, we celebrate the art of the pastry.
-                </p>
-                <div class="social-minimal">
-                    <a href="#" class="social-icon"><span class="material-symbols-outlined">aperture</span></a>
-                    <a href="#" class="social-icon"><span class="material-symbols-outlined">location_on</span></a>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <span class="logo-text">Homedonut</span>
+                    <span class="logo-subtext">Donuts + Café</span>
+                </div>
+                
+                <div class="footer-address">
+                    <span class="material-symbols-outlined">location_on</span>
+                    <p>123 Rue du Glaçage, 75000 Paris</p>
+                </div>
+
+                <div class="footer-socials">
+                    <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-link" title="Snapchat"><i class="fab fa-snapchat"></i></a>
                 </div>
             </div>
 
-            <div class="footer-column">
-                <h4 class="footer-heading">The Patisserie</h4>
+            <div class="footer-col">
+                <h4 class="footer-heading">Menu</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Menu de Saison</a></li>
-                    <li><a href="#">Artisanal Gift Sets</a></li>
-                    <li><a href="#">Bakery Classes</a></li>
-                    <li><a href="#">Wholesale</a></li>
+                    <li><a href="donut.html">La Carte</a></li>
+                    <li><a href="#">Bento Cakes</a></li>
+                    <li><a href="#">Événements</a></li>
+                    <li><a href="#">Coffrets Cadeaux</a></li>
                 </ul>
             </div>
 
-            <div class="footer-column">
-                <h4 class="footer-heading">Curation</h4>
+            <div class="footer-col">
+                <h4 class="footer-heading">Aide</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Sourcing</a></li>
-                    <li><a href="#">Provenance</a></li>
-                    <li><a href="#">Sustainability</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Click & Collect</a></li>
+                    <li><a href="#">Points de vente</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Newsletter</h4>
+                <input type="email" placeholder="Votre email" class="newsletter-input">
+                <button class="btn-footer-news">S'abonner</button>
             </div>
         </div>
 
-        <div class="footer-bottom-bar">
-            <p class="copyright">© 2024 GLAZE & TECH ARTISANS. ESTABLISHED WITH PRECISION.</p>
-            <div class="bottom-legal">
-                <a href="#">PRIVACY POLICY</a>
-                <a href="#">TERMS OF SERVICE</a>
+        <div class="footer-bottom">
+            <p>© 2024 Homedonut. Tous droits réservés.</p>
+            <div class="footer-legal">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Confidentialité</a>
             </div>
         </div>
     </div>
 </footer>
-
 <script>
-     document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
         const navbar = document.getElementById('mainNavbar');
-        const burgerBtn = document.getElementById('burgerBtn');
-        const navMenu = document.getElementById('navMenu');
+        const openBtn = document.getElementById('openBtn');
+        const drawer = document.getElementById('mobileDrawer');
 
-        // GESTION DU MENU BURGER
-        burgerBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navMenu.classList.toggle('active');
-            burgerBtn.textContent = navMenu.classList.contains('active') ? 'close' : 'menu';
-        });
-
-        document.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            burgerBtn.textContent = 'menu';
-        });
-
-        // GESTION DU SCROLL
         window.addEventListener('scroll', () => {
-            const scrollValue = window.scrollY;
-            const heroHeight = window.innerHeight;
-
-            // Disparition à la fin de la vidéo
-            if (scrollValue > heroHeight - 80) {
-                navbar.classList.add('hide-nav'); 
-                navMenu.classList.remove('active');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
             } else {
-                navbar.classList.remove('hide-nav');
-                
-                // Effet transparent flouté moderne dès qu'on commence à scroller
-                if (scrollValue > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
+                navbar.classList.remove('scrolled');
             }
         });
 
-      
-    });
-   
+        openBtn.onclick = (e) => {
+            e.stopPropagation();
+            drawer.classList.toggle('active');
+            openBtn.innerText = drawer.classList.contains('active') ? 'close' : 'menu';
+        };
 
-    // --- FILTRAGE DES PRODUITS ---
-    document.addEventListener('DOMContentLoaded', function() {
-        const filterButtons = document.querySelectorAll('.cat-item');
-        const catalogItems = document.querySelectorAll('#main-catalogue .pastry-card');
-
-        // 1. FONCTION DE FILTRAGE
-        function applyFilter(filterValue) {
-            catalogItems.forEach(item => {
-                // Animation de sortie
-                item.style.opacity = '0';
-                item.style.transform = 'scale(0.95)';
-
-                setTimeout(() => {
-                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                        item.style.display = 'block';
-                        // Petit délai pour déclencher l'animation d'entrée
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'scale(1)';
-                        }, 50);
-                    } else {
-                        item.style.display = 'none';
-                    }
-                }, 300);
-            });
-        }
-
-        // 2. ÉCOUTEURS DE CLIC
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Style visuel des boutons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-
-                // Application du filtre
-                const filterValue = this.getAttribute('data-filter');
-                applyFilter(filterValue);
-            });
+        document.addEventListener('click', (e) => {
+            if (!drawer.contains(e.target) && e.target !== openBtn) {
+                drawer.classList.remove('active');
+                openBtn.innerText = 'menu';
+            }
         });
-
-        // 3. INITIALISATION (Afficher uniquement les donuts au départ)
-        // On force l'affichage initial sur "donuts"
-        applyFilter('donuts');
     });
+
+    // LOGIQUE FAQ (ACCORDÉON)
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        // Optionnel : Fermer les autres questions ouvertes
+        faqItems.forEach(i => i.classList.remove('active')); 
+        
+        if (!isActive) item.classList.add('active'); 
+    });
+});
 </script>
 
 </body>
