@@ -7,6 +7,8 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+
 
     <style>
         :root {
@@ -455,6 +457,229 @@
    ajoute ce lien dans ton <head> : 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
 */
+/* --- FOOTER RESPONSIVE STYLE --- */
+.site-footer {
+    background-color: #f43484; /* Le rose exact de votre image */
+    color: #ffffff;
+    padding: 80px 0 40px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin-top: 50px;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr; /* 4 colonnes sur PC */
+    gap: 40px;
+    margin-bottom: 60px;
+    align-items: start;
+}
+
+/* Logo & Branding */
+.footer-logo .logo-text {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    display: block;
+    line-height: 1;
+}
+
+.footer-logo .logo-subtext {
+    font-size: 10px;
+    letter-spacing: 2px;
+    opacity: 0.9;
+    text-transform: uppercase;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    margin: 20px 0;
+    line-height: 1.6;
+    max-width: 300px;
+    opacity: 0.9;
+}
+
+/* Réseaux Sociaux (Style Cercles Blancs) */
+.footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: #ffffff;
+    color: #f43484 !important; /* Icône rose sur fond blanc */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    background: #1A1A1A;
+    color: #fff !important;
+}
+
+/* Titres des colonnes */
+.footer-heading {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 30px;
+    height: 2px;
+    background: #ffffff;
+}
+
+/* Liens et Infos */
+.footer-links { list-style: none; padding: 0; }
+.footer-links li { margin-bottom: 15px; }
+.footer-links a { 
+    color: #ffffff; 
+    text-decoration: none; 
+    font-size: 14px; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    opacity: 0.9;
+    transition: 0.3s;
+}
+
+.footer-links a:hover { opacity: 1; padding-left: 5px; }
+
+.info-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    margin-bottom: 18px; 
+    font-size: 14px; 
+}
+
+.info-item span { 
+    background: rgba(255,255,255,0.2); 
+    padding: 8px; 
+    border-radius: 50%; 
+    font-size: 18px; 
+}
+
+/* Newsletter Style Pilule */
+.news-text { font-size: 14px; margin-bottom: 20px; opacity: 0.9; }
+
+.newsletter-group {
+    display: flex;
+    background: #ffffff;
+    border-radius: 50px;
+    padding: 5px 5px 5px 20px;
+    align-items: center;
+}
+
+.news-input {
+    flex: 1;
+    border: none;
+    background: none;
+    outline: none;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.news-btn {
+    background: #f43484;
+    color: #ffffff;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.news-btn:hover { background: #1A1A1A; }
+
+/* Bottom Bar */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.footer-legal a { color: #fff; text-decoration: none; margin-left: 20px; opacity: 0.8; }
+.footer-legal a:hover { opacity: 1; }
+
+/* --- RESPONSIVE TABLETTE & MOBILE --- */
+
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr; /* 2 colonnes sur tablette */
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-footer { padding: 60px 0 30px; }
+
+    .footer-grid {
+        grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
+        text-align: center;
+        gap: 40px;
+    }
+
+    .footer-logo, .footer-heading::after {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-heading::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-tagline { margin: 20px auto; }
+    
+    .footer-socials, .footer-links a, .info-item, .newsletter-group {
+        justify-content: center;
+    }
+    
+    .info-item { flex-direction: column; gap: 5px; }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .footer-legal a { margin: 0; }
+}
     </style>
 </head>
 <body>
