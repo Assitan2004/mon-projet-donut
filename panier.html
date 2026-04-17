@@ -680,6 +680,39 @@
     
     .footer-legal a { margin: 0; }
 }
+.logo-img {
+    height: 80px; /* Taille initiale (grande) */
+    width: 300px;
+    transition: all 0.4s ease; /* Animation fluide de la taille */
+    display: block;
+    margin: 0 auto;
+    object-fit: cover; /* Important : évite de déformer l'image */
+}
+
+/* TAILLE RÉDUITE AU SCROLL */
+.navbar.scrolled .logo-img {
+    height: 50px; /* Taille une fois qu'on a scrollé */
+     width: 200px;
+
+}
+
+/* Visibilité des logos */
+.navbar .logo-dark { display: none; }
+.navbar .logo-light { display: block; }
+
+.navbar.scrolled .logo-light { display: none; }
+.navbar.scrolled .logo-dark { display: block; }
+
+/* Ajustement mobile (pour ne pas prendre tout l'écran) */
+@media (max-width: 768px) {
+    .logo-img {
+        height: 90px;
+    }
+    .navbar.scrolled .logo-img {
+        height: 40px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -714,10 +747,12 @@
             <span class="material-symbols-outlined menu-trigger" id="openBtn">menu</span>
         </div>
         
-        <div class="logo-center">
-            <span class="logo-text">Homedonut</span>
-            <span class="logo-subtext">Donuts + Café</span>
-        </div>
+             <div class="logo-center">
+    <a href="index.html">
+        <img src="image/logo_donut.png" alt="Homedonut Logo" class="logo-img logo-light">
+        <img src="image/logo_donut.png" alt="Homedonut Logo" class="logo-img logo-dark">
+    </a>
+</div>
 
         <div class="nav-right">
             <span class="material-symbols-outlined desktop-only">favorite</span>
@@ -951,6 +986,82 @@
             drawer.classList.remove('active');
         }
     });
+
+const API = "http://127.0.0.1:5000";
+
+function afficherPanier() {
+    const panier = JSON.parse(localStorage.getItem("panier") || "[]");
+    const container = document.querySelector(".cart-table-container");
+    const header = container.querySelector(".cart-table-header");
+    
+    container.innerHTML = "";
+    container.appendChild(header);
+
+    if (panier.length === 0) {
+        container.innerHTML += `<p style="padding:30px; text-align:center; color:#888;">Votre panier est vide 🍩</p>`;
+    }
+
+    panier.forEach(item => {
+        container.innerHTML += `
+            <div class="cart-item" id="item-${item.id}">
+                <div class="product-col">
+                    <div class="item-img"><img src="${item.image}" alt="${item.nom}"></div>
+                    <div class="item-info">
+                        <h3>${item.nom}</h3>
+                        <p>${item.prix.toFixed(2)} € / unité</p>
+                    </div>
+                </div>
+                <div class="qty-col">
+                    <div class="qty-box">
+                        <span class="qty-btn" onclick="changerQte(${item.id}, ${item.quantite + 1})">+</span>
+                        <span class="qty-num">${item.quantite}</span>
+                        <span class="qty-btn" onclick="changerQte(${item.id}, ${item.quantite - 1})">−</span>
+                    </div>
+                </div>
+                <div class="item-price">${(item.prix * item.quantite).toFixed(2)}€</div>
+                <div class="action-col">
+                    <span class="material-symbols-outlined delete-btn" onclick="supprimerItem(${item.id})">delete</span>
+                </div>
+            </div>
+        `;
+    });
+
+    calculerTotal(panier);
+}
+
+function changerQte(id, nouvelleQte) {
+    let panier = JSON.parse(localStorage.getItem("panier") || "[]");
+    if (nouvelleQte <= 0) {
+        panier = panier.filter(item => item.id !== id);
+    } else {
+        const index = panier.findIndex(item => item.id === id);
+        if (index !== -1) panier[index].quantite = nouvelleQte;
+    }
+    localStorage.setItem("panier", JSON.stringify(panier));
+    afficherPanier();
+}
+
+function supprimerItem(id) {
+    let panier = JSON.parse(localStorage.getItem("panier") || "[]");
+    panier = panier.filter(item => item.id !== id);
+    localStorage.setItem("panier", JSON.stringify(panier));
+    afficherPanier();
+}
+
+function calculerTotal(items) {
+    const sous_total = items.reduce((acc, item) => acc + item.prix * item.quantite, 0);
+    const livraison = sous_total > 0 ? 2.50 : 0;
+    const total = sous_total + livraison;
+
+    document.querySelector(".summary-line:nth-child(1) span:last-child").textContent = sous_total.toFixed(2) + " EUR";
+    document.querySelector(".summary-line:nth-child(3) span:last-child").textContent = livraison.toFixed(2) + " EUR";
+    document.querySelector(".summary-total span:last-child").innerHTML = total.toFixed(2) + '<span class="currency"> EUR</span>';
+}
+
+
+
+afficherPanier();
+
 </script>
 </body>
 </html>

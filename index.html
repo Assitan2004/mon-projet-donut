@@ -1100,8 +1100,31 @@ body.show-chatbot .chatbot {
             <div class="nav-right">
                 <span class="material-symbols-outlined desktop-only">favorite</span>
                 <a href="panier.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">shopping_bag</span></a>
-                <a href="#" style="color: inherit;"><span class="material-symbols-outlined">person</span></a>
-            </div>
+<div class="user-menu-wrapper" style="position: relative;">
+    <span class="material-symbols-outlined" id="userBtn" style="cursor:pointer;">person</span>
+    <div id="userDropdown" style="
+        display: none;
+        position: absolute;
+        right: 0; top: 48px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        padding: 8px;
+        min-width: 220px;
+        z-index: 9999;
+        border: 1px solid rgba(0,0,0,0.06);
+    ">
+        <div style="padding: 14px 16px 12px; border-bottom: 1px solid #f1f1f1; margin-bottom: 6px;">
+            <p id="userGreeting" style="font-weight: 800; font-size: 15px; color: #1a1a1a;"></p>
+        </div>
+        <a href="compte.html" style="display:flex; align-items:center; gap:10px; padding: 11px 16px; border-radius: 12px; text-decoration:none; color:#1a1a1a; font-size:14px; font-weight:600; transition:0.2s;" onmouseover="this.style.background='#f8f8f8'" onmouseout="this.style.background='transparent'">
+            <span class="material-symbols-outlined" style="font-size:19px; color:#666;">manage_accounts</span> Mon compte
+        </a>
+        <a href="#" id="logoutBtn" style="display:flex; align-items:center; gap:10px; padding: 11px 16px; border-radius: 12px; text-decoration:none; color:#f43484; font-size:14px; font-weight:600; transition:0.2s;" onmouseover="this.style.background='#fff0f5'" onmouseout="this.style.background='transparent'">
+            <span class="material-symbols-outlined" style="font-size:19px;">logout</span> Se déconnecter
+        </a>
+    </div>
+</div>        </div>
         </div>
     </nav>
 
@@ -1129,84 +1152,25 @@ body.show-chatbot .chatbot {
         </div>
     </div>
 
-    <div class="hero-content">
-        <h1 class="hero-title">L'Éveil des Sens.</h1>
-        <p class="hero-subtitle">Découvrez l'alliance parfaite entre haute pâtisserie et gourmandise artisanale. 
-            </p>
-        <div class="hero-btns">
-            <a href="donut.html" class="btn-primary-solid">Explorer la collection</a>
-            <button class="btn-outline-white">
-                <span class="material-symbols-outlined">play_circle</span> Notre savoir-faire
-            </button>
-        </div>
+   <div class="hero-content">
+    <h1 class="hero-title">L'Art de la Gourmandise.</h1>
+    <p class="hero-subtitle">
+        Succombez à l'équilibre parfait entre l'excellence de la haute pâtisserie et l'authenticité d'un savoir-faire artisanal.
+    </p>
+    <div class="hero-btns">
+        <a href="donut.html" class="btn-primary-solid">Découvrir la collection</a>
+        <button class="btn-outline-white">
+            <span class="material-symbols-outlined">play_circle</span> Notre héritage
+        </button>
     </div>
+</div>
 </header>
 
 <main class="container" style="padding: 4rem 2rem;">
     <h2 style="text-align: center; margin-bottom: 3rem; font-weight: 800; font-size: 2rem;">Best sellers</h2>
 
-    <div class="bakery-grid">
-        <div class="pastry-card">
-            <div class="image-container">
-                <img src="image/d11_modifie.png" class="pastry-image" alt="Donut">
-                <div class="overlay-voir-plus">
-                    <p>Donuts Mms</p>
-                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="pastry-card">
-            <div class="image-container">
-                <img src="image/d2.jpg" class="pastry-image" alt="Donut">
-                <div class="overlay-voir-plus">
-                    <p>Matcha Zen</p>
-                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="pastry-card">
-            <div class="image-container">
-                <img src="image/d7_modifie.png" class="pastry-image" alt="Donut">
-                <div class="overlay-voir-plus">
-                    <p>Honey Glaze</p>
-                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
-                </div>
-            </div>
-        </div>
-
-          <div class="pastry-card">
-            <div class="image-container">
-                <img src="image/d9_modifie.png" class="pastry-image" alt="Donut">
-                <div class="overlay-voir-plus">
-                    <p>Donuts Mms</p>
-                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="pastry-card">
-            <div class="image-container">
-                <img src="image/d10µ.jpg" class="pastry-image" alt="Donut">
-                <div class="overlay-voir-plus">
-                    <p>Matcha Zen</p>
-                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="pastry-card">
-            <div class="image-container">
-                <img src="image/d8.jpg" class="pastry-image" alt="Donut">
-                <div class="overlay-voir-plus">
-                    <p>Honey Glaze</p>
-                    <a href="detail_produit.html" class="btn-plus">Voir plus</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+   <div class="bakery-grid" id="best-sellers-grid">
+</div>
 </main>
 <section class="faq-section">
     <div class="container-small">
@@ -1444,6 +1408,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+    fetch("http://127.0.0.1:5000/produits/best-sellers")
+        .then(res => res.json())
+        .then(produits => {
+            const grid = document.getElementById("best-sellers-grid");
+            
+            produits.slice(0, 6).forEach(produit => {
+                grid.innerHTML += `
+                    <div class="pastry-card">
+                        <div class="image-container">
+                            <img src="${produit.image}" class="pastry-image" alt="${produit.nom}">
+                            <div class="overlay-voir-plus">
+                                <p>${produit.nom}</p>
+                                <a href="detail_produit.html?id=${produit.id}" class="btn-plus">Voir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        })
+        .catch(err => console.error("Erreur :", err));
+        // ---- MENU UTILISATEUR ----
+const user = JSON.parse(localStorage.getItem("user"));
+const userBtn = document.getElementById("userBtn");
+const userDropdown = document.getElementById("userDropdown");
+const userGreeting = document.getElementById("userGreeting");
+
+if (user) {
+    userBtn.innerText = "account_circle";
+userGreeting.innerText = "Bonjour, " + user.prenom + " ";
+userGreeting.style.color = "#1a1a1a";
+userGreeting.style.fontSize = "14px";
+}
+
+userBtn.onclick = (e) => {
+    e.stopPropagation();
+    userDropdown.style.display = userDropdown.style.display === "none" ? "block" : "none";
+};
+
+document.addEventListener("click", () => {
+    userDropdown.style.display = "none";
+});
+
+document.getElementById("logoutBtn").onclick = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("user");
+    window.location.href = "connexion.html";
+};
 </script>
 
 </body>
