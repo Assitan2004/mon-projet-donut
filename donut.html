@@ -7,7 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
 
     <style>
         :root {
@@ -16,6 +16,10 @@
             --text-muted: #1a1a1a;
             --white: #ffffff;
             --bg-light: #F9F9F9;
+
+            /* Variables ajoutées pour le Chatbot */
+            --chat-gradient: linear-gradient(135deg, #f43484 0%, #ff7eb3 100%);
+            --glass-bg: rgba(255, 255, 255, 0.85);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -64,7 +68,7 @@
 
         .logo-center { text-align: center; }
         .logo-text { font-weight: 800; font-size: 1.5rem; letter-spacing: -1.5px; text-transform: uppercase; }
-        .logo-subtext { font-size: 10px; letter-spacing: 4px; display: block; opacity: 0.5; font-weight: 700;  }
+        .logo-subtext { font-size: 10px; letter-spacing: 4px; display: block; opacity: 0.5; font-weight: 700; margin-top: -4px; }
 
         .nav-right { display: flex; gap: 24px; align-items: center; color: var(--text-dark); }
         .nav-right span { cursor: pointer; font-variation-settings: 'wght' 300; transition: 0.3s; }
@@ -249,10 +253,46 @@
         @media (max-width: 1024px) {
             .product-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        @media (max-width: 650px) {
-            .product-grid { grid-template-columns: 1fr; }
-            .shop-header h1 { font-size: 2.5rem; }
-        }
+/* --- ADAPTATION MOBILE (COLONNE UNIQUE ET TAILLE) --- */
+@media (max-width: 650px) {
+    /* Assure que la grille est bien en colonne unique */
+    .product-grid { 
+        grid-template-columns: 1fr; 
+        gap: 30px; 
+        padding: 0 1rem 4rem; 
+    }
+
+    /* Réduit la taille du titre */
+    .shop-header h1 { 
+        font-size: 1.8rem; 
+        margin-bottom: 1.5rem; 
+    }
+
+    /* Ajuste la taille du texte des cartes pour le mobile */
+    .product-card h3 { 
+        font-size: 1.2rem; 
+    }
+
+    .product-desc { 
+        font-size: 0.8rem; 
+        margin-bottom: 15px; 
+    }
+
+    /* Adapte le bouton d'ajout au panier */
+    .add-to-cart {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+        padding: 12px 16px;
+        font-size: 0.7rem;
+    }
+
+    /* Assure que l'image ne soit pas trop grande */
+    .image-container {
+        max-width: 250px;
+        margin: 0 auto 10px auto;
+    }
+}
         /* --- OPTIMISATION NAV MOBILE --- */
 @media (max-width: 768px) {
     .nav-container {
@@ -284,7 +324,6 @@
 
 @media (max-width: 650px) {
     .product-grid { 
-        grid-template-columns: 1fr; /* Une seule colonne sur petit téléphone */
         gap: 40px;
     }
 
@@ -481,329 +520,211 @@
 body.menu-open {
     overflow: hidden;
 }
-.footer-socials {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-}
+        /* --- FOOTER --- */
+        .site-footer {
+            background-color: #f43484; 
+            color: #ffffff;
+            padding: 80px 0 40px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin-top: 50px;
+        }
 
-.social-link {
-    width: 40px;
-    height: 40px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 50%;
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: start;
+        }
+
+        .footer-logo .logo-text { font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; display: block; line-height: 1; }
+        .footer-logo .logo-subtext { font-size: 10px; letter-spacing: 2px; opacity: 0.9; text-transform: uppercase; }
+        .footer-tagline { font-size: 14px; margin: 20px 0; line-height: 1.6; max-width: 300px; opacity: 0.9; }
+
+        .footer-socials { display: flex; gap: 12px; }
+        .social-link {
+            width: 40px; height: 40px; background: #ffffff; color: #f43484 !important;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: 0.3s ease;
+        }
+        .social-link:hover { transform: translateY(-5px); background: #1A1A1A; color: #fff !important; }
+
+        .footer-heading { font-size: 16px; font-weight: 700; margin-bottom: 25px; position: relative; padding-bottom: 10px; }
+        .footer-heading::after { content: ''; position: absolute; left: 0; bottom: 0; width: 30px; height: 2px; background: #ffffff; }
+
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: #ffffff; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 10px; opacity: 0.9; transition: 0.3s; }
+        .footer-links a:hover { opacity: 1; padding-left: 5px; }
+
+        .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 18px; font-size: 14px; }
+        .info-item span { background: rgba(255,255,255,0.2); padding: 8px; border-radius: 50%; font-size: 18px; }
+
+        .news-text { font-size: 14px; margin-bottom: 20px; opacity: 0.9; }
+        .newsletter-group { display: flex; background: #ffffff; border-radius: 50px; padding: 5px 5px 5px 20px; align-items: center; }
+        .news-input { flex: 1; border: none; background: none; outline: none; padding: 10px 0; font-size: 14px; color: #333; }
+        .news-btn { background: #f43484; color: #ffffff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .news-btn:hover { background: #1A1A1A; }
+
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.2); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .footer-legal a { color: #fff; text-decoration: none; margin-left: 20px; opacity: 0.8; }
+        .footer-legal a:hover { opacity: 1; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 50px; }
+        }
+        @media (max-width: 768px) {
+            .site-footer { padding: 60px 0 30px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .footer-logo, .footer-heading::after { display: flex; flex-direction: column; align-items: center; }
+            .footer-heading::after { left: 50%; transform: translateX(-50%); }
+            .footer-tagline { margin: 20px auto; }
+            .footer-socials, .footer-links a, .info-item, .newsletter-group { justify-content: center; }
+            .info-item { flex-direction: column; gap: 5px; }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+            .footer-legal { display: flex; flex-direction: column; gap: 10px; }
+            .footer-legal a { margin: 0; }
+        }
+
+/* --- CHATBOT ULTRA MODERNE --- */
+.chatbot-toggler {
+    position: fixed;
+    bottom: 35px;
+    right: 35px;
+    height: 65px;
+    width: 65px;
+    color: #fff;
+    background: var(--chat-gradient);
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    color: #fff !important;
-    transition: all 0.3s ease;
+    border-radius: 22px;
+    cursor: pointer;
+    box-shadow: 0 15px 35px rgba(244, 52, 132, 0.3);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 3000;
 }
 
-.social-link:hover {
-    background: var(--accent-pink);
-    transform: translateY(-3px);
-}
-.site-footer {
-    background-color: #f43484; /* Ton rose exact */
-    color: #ffffff;
-    padding: 80px 0 40px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+.chatbot-toggler:hover {
+    transform: translateY(-5px) rotate(8deg);
+    box-shadow: 0 20px 40px rgba(244, 52, 132, 0.4);
 }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr 1fr 1.2fr; /* Ajustement des largeurs */
-    gap: 40px;
-    align-items: start; /* Aligne tout le monde en haut ! */
-    margin-bottom: 60px;
+.chatbot {
+    position: fixed;
+    right: 35px;
+    bottom: 120px;
+    width: 400px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(40px) scale(0.8);
+    transform-origin: bottom right;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 3000;
 }
 
-.footer-logo .logo-text {
-    font-size: 1.8rem;
+body.show-chatbot .chatbot {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.chatbot header {
+    background: var(--chat-gradient);
+    padding: 25px;
+    color: #fff;
+    position: relative;
+}
+
+.chatbot header h2 {
+    font-size: 1.3rem;
     font-weight: 800;
-    letter-spacing: -1px;
-    display: block;
+    letter-spacing: -0.5px;
 }
 
-.footer-logo .logo-subtext {
-    font-size: 10px;
-    letter-spacing: 2px;
-    opacity: 0.8;
+.chatbot header p {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    margin-top: 4px;
 }
 
-.footer-tagline {
-    font-size: 14px;
-    margin: 20px 0;
+.chatbot .chatbox {
+    height: 450px;
+    overflow-y: auto;
+    padding: 25px;
+    list-style: none;
+    background: transparent;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-pink) transparent;
+}
+
+.chatbox .chat p {
+    padding: 14px 18px;
+    font-size: 0.95rem;
     line-height: 1.5;
-    max-width: 250px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
 }
 
-.footer-heading {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 25px;
-    position: relative;
-    padding-bottom: 10px;
-    color: #fff;
-}
-
-/* Le petit trait sous le titre comme sur ton image mais mieux placé */
-.footer-heading::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 30px;
-    height: 2px;
-    background: #fff;
-}
-
-.footer-links { list-style: none; padding: 0; }
-.footer-links li { margin-bottom: 12px; }
-.footer-links a { 
-    color: #fff; 
-    text-decoration: none; 
-    font-size: 14px; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-}
-
-.info-item { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; font-size: 14px; }
-.info-item span { background: rgba(255,255,255,0.2); padding: 6px; border-radius: 50%; font-size: 18px; }
-
-/* Newsletter - Style "Pill" ultra propre */
-.newsletter-group {
-    display: flex;
-    background: #fff;
-    border-radius: 50px;
-    padding: 5px;
-    margin-top: 15px;
-}
-.news-input {
-    flex: 1;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 50px;
-    outline: none;
-}
-.news-btn {
-    background: #f43484;
-    color: #fff;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-/* Réseaux sociaux - Taille mieux proportionnée */
-.footer-socials { display: flex; gap: 12px; }
-.social-link {
-    width: 38px;
-    height: 38px;
-    background: #fff;
-    color: #f43484 !important;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: 0.3s;
-}
-.social-link:hover { transform: translateY(-3px); background: #1A1A1A; color: #fff !important; }
-
-.footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.2);
-    padding-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-}
-.footer-legal a { color: #fff; text-decoration: none; margin-left: 15px; }
-/* Important : Si tu n'as pas FontAwesome pour les icônes TikTok/Snapchat, 
-   ajoute ce lien dans ton <head> : 
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
-*/
-
-/* --- FOOTER RESPONSIVE STYLE --- */
-.site-footer {
-    background-color: #f43484; /* Le rose exact de votre image */
-    color: #ffffff;
-    padding: 80px 0 40px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    margin-top: 50px;
-}
-
-.container {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1.2fr; /* 4 colonnes sur PC */
-    gap: 40px;
-    margin-bottom: 60px;
-    align-items: start;
-}
-
-/* Logo & Branding */
-.footer-logo .logo-text {
-    font-size: 1.8rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    display: block;
-    line-height: 1;
-}
-
-.footer-logo .logo-subtext {
-    font-size: 10px;
-    letter-spacing: 2px;
-    opacity: 0.9;
-    text-transform: uppercase;
-}
-
-.footer-tagline {
-    font-size: 14px;
+.chatbox .outgoing {
+    justify-content: flex-end;
     margin: 20px 0;
-    line-height: 1.6;
-    max-width: 300px;
-    opacity: 0.9;
 }
 
-/* Réseaux Sociaux (Style Cercles Blancs) */
-.footer-socials {
-    display: flex;
-    gap: 12px;
+.chatbox .outgoing p {
+    background: var(--chat-gradient);
+    color: #fff;
+    border-radius: 22px 22px 4px 22px;
 }
 
-.social-link {
-    width: 40px;
-    height: 40px;
-    background: #ffffff;
-    color: #f43484 !important; /* Icône rose sur fond blanc */
-    border-radius: 50%;
+.chatbox .incoming p {
+    background: #fff;
+    color: var(--text-dark);
+    border-radius: 22px 22px 22px 4px;
+}
+
+.chatbot .chat-input {
     display: flex;
+    padding: 20px 25px;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.05);
     align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: 0.3s ease;
+    gap: 15px;
 }
 
-.social-link:hover {
-    transform: translateY(-5px);
-    background: #1A1A1A;
-    color: #fff !important;
-}
-
-/* Titres des colonnes */
-.footer-heading {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 25px;
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.footer-heading::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 30px;
-    height: 2px;
-    background: #ffffff;
-}
-
-/* Liens et Infos */
-.footer-links { list-style: none; padding: 0; }
-.footer-links li { margin-bottom: 15px; }
-.footer-links a { 
-    color: #ffffff; 
-    text-decoration: none; 
-    font-size: 14px; 
-    display: flex; 
-    align-items: center; 
-    gap: 10px;
-    opacity: 0.9;
-    transition: 0.3s;
-}
-
-.footer-links a:hover { opacity: 1; padding-left: 5px; }
-
-.info-item { 
-    display: flex; 
-    align-items: center; 
-    gap: 15px; 
-    margin-bottom: 18px; 
-    font-size: 14px; 
-}
-
-.info-item span { 
-    background: rgba(255,255,255,0.2); 
-    padding: 8px; 
-    border-radius: 50%; 
-    font-size: 18px; 
-}
-
-/* Newsletter Style Pilule */
-.news-text { font-size: 14px; margin-bottom: 20px; opacity: 0.9; }
-
-.newsletter-group {
-    display: flex;
-    background: #ffffff;
-    border-radius: 50px;
-    padding: 5px 5px 5px 20px;
-    align-items: center;
-}
-
-.news-input {
-    flex: 1;
+.chat-input textarea {
+    height: 24px;
+    width: 100%;
     border: none;
-    background: none;
     outline: none;
-    padding: 10px 0;
-    font-size: 14px;
-    color: #333;
+    resize: none;
+    font-family: inherit;
+    background: transparent;
+    font-size: 0.95rem;
 }
 
-.news-btn {
-    background: #f43484;
-    color: #ffffff;
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
+#send-btn {
+    color: var(--accent-pink);
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     transition: 0.3s;
 }
 
-.news-btn:hover { background: #1A1A1A; }
-
-/* Bottom Bar */
-.footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.2);
-    padding-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
+#send-btn:hover {
+    transform: scale(1.2) rotate(-10deg);
 }
-
-.footer-legal a { color: #fff; text-decoration: none; margin-left: 20px; opacity: 0.8; }
-.footer-legal a:hover { opacity: 1; }
-
-/* --- RESPONSIVE TABLETTE & MOBILE --- */
 
 @media (max-width: 1024px) {
     .footer-grid {
-        grid-template-columns: 1fr 1fr; /* 2 colonnes sur tablette */
+        grid-template-columns: 1fr 1fr;
         gap: 50px;
     }
 }
@@ -812,7 +733,7 @@ body.menu-open {
     .site-footer { padding: 60px 0 30px; }
 
     .footer-grid {
-        grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
+        grid-template-columns: 1fr;
         text-align: center;
         gap: 40px;
     }
@@ -850,6 +771,7 @@ body.menu-open {
     
     .footer-legal a { margin: 0; }
 }
+
     </style>
 </head>
 <body>
@@ -885,21 +807,19 @@ body.menu-open {
         </div>
         
         <div class="logo-center">
-            <span class="logo-text">Homedonut</span>
+            <span class="logo-text">ChezBiskuit</span>
             <span class="logo-subtext">Donuts + Café</span>
         </div>
 
         <div class="nav-right">
-            <span class="material-symbols-outlined desktop-only">favorite</span>
+            <a href="favoris.html"><span class="material-symbols-outlined desktop-only" style="color: #1A1A1A;">favorite</span></a>  
             <a href="panier.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">shopping_bag</span></a>
             <a href="connexion.html" style="color: inherit;"><span class="material-symbols-outlined">person</span></a>
         </div>
     </div>
 </nav>
     <header class="shop-header">
-      <!--  <h1>Fraîchement glacés.</h1> -->
-        
-        <div class="delivery-options">
+      <div class="delivery-options">
             <div class="opt-btn">À emporter</div>
             <div class="opt-btn">Livraison</div>
         </div>
@@ -912,9 +832,9 @@ body.menu-open {
         </div>
     </header>
 
- <main class="product-grid">
+ <main class="product-grid" id="products-grid">
         
-              <div class="product-card">
+        <div class="product-card">
             <div class="image-container">
                 <button class="favorite-btn">
                     <span class="material-symbols-outlined">favorite</span>
@@ -924,13 +844,13 @@ body.menu-open {
             <h3>Marshmallow Croustillant</h3>
             <div class="product-price">5.50€</div>
             <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
-            <button class="add-to-cart">
+            <button class="add-to-cart" onclick="ajouterAuPanier(1, 'Marshmallow Croustillant', 5.50, 'image/d8.jpg')">
                 <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
                 Ajouter au panier
             </button>
         </div>
 
-                <div class="product-card">
+        <div class="product-card">
             <div class="image-container">
                 <button class="favorite-btn">
                     <span class="material-symbols-outlined">favorite</span>
@@ -941,13 +861,13 @@ body.menu-open {
             <h3>Marshmallow Croustillant</h3>
             <div class="product-price">5.50€</div>
             <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
-            <button class="add-to-cart">
+            <button class="add-to-cart" onclick="ajouterAuPanier(2, 'Marshmallow Croustillant', 5.50, 'image/d2.jpg')">
                 <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
                 Ajouter au panier
             </button>
         </div>
 
-                <div class="product-card">
+        <div class="product-card">
             <div class="image-container">
                 <button class="favorite-btn">
                     <span class="material-symbols-outlined">favorite</span>
@@ -958,13 +878,13 @@ body.menu-open {
             <h3>Marshmallow Croustillant</h3>
             <div class="product-price">5.50€</div>
             <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
-            <button class="add-to-cart">
+            <button class="add-to-cart" onclick="ajouterAuPanier(3, 'Marshmallow Croustillant', 5.50, 'image/d7_modifie.png')">
                 <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
                 Ajouter au panier
             </button>
         </div>
 
-                <div class="product-card">
+        <div class="product-card">
             <div class="image-container">
                 <button class="favorite-btn">
                     <span class="material-symbols-outlined">favorite</span>
@@ -975,13 +895,13 @@ body.menu-open {
             <h3>Marshmallow Croustillant</h3>
             <div class="product-price">5.50€</div>
             <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
-            <button class="add-to-cart">
+            <button class="add-to-cart" onclick="ajouterAuPanier(4, 'Marshmallow Croustillant', 5.50, 'image/d11_modifie.png')">
                 <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
                 Ajouter au panier
             </button>
         </div>
 
-                <div class="product-card">
+        <div class="product-card">
             <div class="image-container">
                 <button class="favorite-btn">
                     <span class="material-symbols-outlined">favorite</span>
@@ -992,13 +912,13 @@ body.menu-open {
             <h3>Marshmallow Croustillant</h3>
             <div class="product-price">5.50€</div>
             <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
-            <button class="add-to-cart">
+            <button class="add-to-cart" onclick="ajouterAuPanier(5, 'Marshmallow Croustillant', 5.50, 'image/d9_modifie.png')">
                 <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
                 Ajouter au panier
             </button>
         </div>
 
-                <div class="product-card">
+        <div class="product-card">
             <div class="image-container">
                 <button class="favorite-btn">
                     <span class="material-symbols-outlined">favorite</span>
@@ -1008,13 +928,13 @@ body.menu-open {
             <h3>Marshmallow Croustillant</h3>
             <div class="product-price">5.50€</div>
             <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
-            <button class="add-to-cart">
+            <button class="add-to-cart" onclick="ajouterAuPanier(6, 'Marshmallow Croustillant', 5.50, 'image/d3.png')">
                 <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
                 Ajouter au panier
             </button>
         </div>
 
-                <div class="product-card">
+        <div class="product-card">
             <div class="image-container">
                 <button class="favorite-btn">
                     <span class="material-symbols-outlined">favorite</span>
@@ -1024,13 +944,13 @@ body.menu-open {
             <h3>Marshmallow Croustillant</h3>
             <div class="product-price">5.50€</div>
             <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
-            <button class="add-to-cart">
+            <button class="add-to-cart" onclick="ajouterAuPanier(7, 'Marshmallow Croustillant', 5.50, 'image/d8.jpg')">
                 <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
                 Ajouter au panier
             </button>
         </div>
 
-                <div class="product-card">
+        <div class="product-card">
             <div class="image-container">
                 <button class="favorite-btn">
                     <span class="material-symbols-outlined">favorite</span>
@@ -1040,13 +960,13 @@ body.menu-open {
             <h3>Marshmallow Croustillant</h3>
             <div class="product-price">5.50€</div>
             <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
-            <button class="add-to-cart">
+            <button class="add-to-cart" onclick="ajouterAuPanier(8, 'Marshmallow Croustillant', 5.50, 'image/d2.jpg')">
                 <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
                 Ajouter au panier
             </button>
         </div>
 
-                        <div class="product-card">
+        <div class="product-card">
             <div class="image-container">
                 <button class="favorite-btn">
                     <span class="material-symbols-outlined">favorite</span>
@@ -1056,22 +976,21 @@ body.menu-open {
             <h3>Marshmallow Croustillant</h3>
             <div class="product-price">5.50€</div>
             <p class="product-desc">Guimauve fondante et grillée avec un croquant caramélisé.</p>
-            <button class="add-to-cart">
+            <button class="add-to-cart" onclick="ajouterAuPanier(9, 'Marshmallow Croustillant', 5.50, 'image/d7_modifie.png')">
                 <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
                 Ajouter au panier
             </button>
         </div>
-
         
-        </main>
+</main>
 
-        <footer class="site-footer">
+<footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
             
             <div class="footer-col branding">
                 <div class="footer-logo">
-                    <span class="logo-text">HOMEDONUT</span>
+                    <span class="logo-text">Chez Biskuit</span>
                     <span class="logo-subtext">HAUTE BEIGNETERIE</span>
                 </div>
                 <p class="footer-tagline">L'art du donut artisanal, façonné à la main chaque matin pour vos moments d'exception.</p>
@@ -1134,8 +1053,28 @@ body.menu-open {
     </div>
 </footer>
 
+<button class="chatbot-toggler">
+    <span class="material-symbols-outlined icon-chat">auto_awesome</span>
+    <span class="material-symbols-outlined icon-close" style="display:none;">close</span>
+</button>
 
-        <script>
+<div class="chatbot">
+    <header>
+        <h2>Homedonut AI</h2>
+        <p>En ligne • Prêt à vous régaler</p>
+    </header>
+    <ul class="chatbox">
+        <li class="chat incoming">
+            <p>Bonjour ! Je suis votre assistant gourmet. Quelle douceur vous ferait plaisir aujourd'hui ? 🍩</p>
+        </li>
+    </ul>
+    <div class="chat-input">
+        <textarea placeholder="Posez votre question..." required></textarea>
+        <span id="send-btn" class="material-symbols-outlined">send</span>
+    </div>
+</div>
+
+<script>
 const openBtn = document.getElementById('openBtn');
 const drawer = document.getElementById('mobileDrawer');
 
@@ -1150,42 +1089,8 @@ document.addEventListener('click', (e) => {
         drawer.classList.remove('active');
     }
 });
-const API = "http://127.0.0.1:5000";
 
 document.addEventListener("DOMContentLoaded", () => {
-
-    // ---- CHARGER LES PRODUITS ----
-    fetch(`${API}/produits/`)
-        .then(res => res.json())
-        .then(produits => {
-            const grid = document.getElementById("products-grid");
-            grid.innerHTML = "";
-            
-            produits.forEach(produit => {
-                grid.innerHTML += `
-                    <div class="product-card">
-                        <div class="image-container">
-                            <button class="favorite-btn">
-                                <span class="material-symbols-outlined">favorite</span>
-                            </button>
-                            <img src="${produit.image}" class="product-image" alt="${produit.nom}">
-                        </div>
-                        <h3>${produit.nom}</h3>
-                        <div class="product-price">${produit.prix.toFixed(2)}€</div>
-                        <p class="product-desc">${produit.description}</p>
-                        <button class="add-to-cart" onclick="ajouterAuPanier(${produit.id}, '${produit.nom}', ${produit.prix}, '${produit.image}')">
-                            <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
-                            Ajouter au panier
-                        </button>
-                    </div>
-                `;
-            });
-        })
-        .catch(err => {
-            console.error("Erreur produits :", err);
-            document.getElementById("products-grid").innerHTML = "<p style='padding:2rem;'>Erreur de chargement des produits.</p>";
-        });
-
     // ---- MENU MOBILE ----
     const openBtn = document.getElementById('openBtn');
     const drawer = document.getElementById('mobileDrawer');
@@ -1198,6 +1103,62 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('click', (e) => {
         if (!drawer.contains(e.target) && e.target !== openBtn) {
             drawer.classList.remove('active');
+        }
+    });
+
+    // ---- LOGIQUE INTERACTIVE DU CHATBOT ----
+    const chatbotToggler = document.querySelector(".chatbot-toggler");
+    const iconChat = document.querySelector(".icon-chat");
+    const iconClose = document.querySelector(".icon-close");
+    const chatInput = document.querySelector(".chat-input textarea");
+    const sendChatBtn = document.querySelector("#send-btn");
+    const chatbox = document.querySelector(".chatbox");
+
+    chatbotToggler.addEventListener("click", () => {
+        document.body.classList.toggle("show-chatbot");
+        
+        if (document.body.classList.contains("show-chatbot")) {
+            iconChat.style.display = "none";
+            iconClose.style.display = "block";
+        } else {
+            iconChat.style.display = "block";
+            iconClose.style.display = "none";
+        }
+    });
+
+    const createChatLi = (message, className) => {
+        const chatLi = document.createElement("li");
+        chatLi.classList.add("chat", className);
+        chatLi.innerHTML = `<p>${message}</p>`;
+        return chatLi;
+    }
+
+    const handleChat = () => {
+        const userMessage = chatInput.value.trim();
+        if(!userMessage) return;
+        chatInput.value = "";
+
+        chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+
+        setTimeout(() => {
+            const incomingChatLi = createChatLi("Je prépare votre réponse... ✨", "incoming");
+            chatbox.appendChild(incomingChatLi);
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+
+            setTimeout(() => {
+                incomingChatLi.querySelector("p").textContent = "C'est noté ! Un de nos chefs pâtissiers va vous répondre d'ici quelques instants. En attendant, nos donuts Mms sont en promotion ! 🍩";
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+            }, 1000);
+        }, 500);
+    }
+
+    sendChatBtn.addEventListener("click", handleChat);
+    
+    chatInput.addEventListener("keydown", (e) => {
+        if(e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleChat();
         }
     });
 });
@@ -1230,7 +1191,7 @@ function ajouterAuPanier(id, nom, prix, image) {
     setTimeout(() => msg.remove(), 2500);
 }
 
-     // ---- MENU UTILISATEUR ----
+// ---- MENU UTILISATEUR ----
 const user = JSON.parse(localStorage.getItem("user"));
 const userBtn = document.getElementById("userBtn");
 const userDropdown = document.getElementById("userDropdown");
@@ -1238,9 +1199,9 @@ const userGreeting = document.getElementById("userGreeting");
 
 if (user) {
     userBtn.innerText = "account_circle";
-userGreeting.innerText = "Bonjour, " + user.prenom + " ";
-userGreeting.style.color = "#1a1a1a";
-userGreeting.style.fontSize = "14px";
+    userGreeting.innerText = "Bonjour, " + user.prenom + " ";
+    userGreeting.style.color = "#1a1a1a";
+    userGreeting.style.fontSize = "14px";
 }
 
 userBtn.onclick = (e) => {
