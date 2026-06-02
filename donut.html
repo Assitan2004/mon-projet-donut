@@ -65,9 +65,29 @@
         }
 
         .order-now:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(244, 52, 132, 0.2); }
+        .logo-center { 
+    text-align: center; 
+    color: inherit; 
+    flex: 2;
+    transition: var(--transition);
+    /* On retire le text-transform: uppercase pour ne pas écraser le "i" minuscule */
+}
 
-        .logo-center { text-align: center; }
-        .logo-text { font-weight: 800; font-size: 1.5rem; letter-spacing: -1.5px; text-transform: uppercase; }
+.logo-text { 
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; /* Une graisse moyenne/fine correspond mieux à l'image */
+    font-size: 1.6rem; 
+    letter-spacing: 2px; /* Grand espacement comme sur l'image_d3b0ba.png */
+    display: block;
+    text-transform: none; /* Crucial pour garder le "i" minuscule */
+}
+
+/* Style spécifique pour parfaire le "!" et le "i" */
+.logo-text span {
+    font-weight: 700; /* Légèrement plus épais pour équilibrer le visuel */
+    display: inline-block;
+}
+
         .logo-subtext { font-size: 10px; letter-spacing: 4px; display: block; opacity: 0.5; font-weight: 700; margin-top: -4px; }
 
         .nav-right { display: flex; gap: 24px; align-items: center; color: var(--text-dark); }
@@ -539,7 +559,7 @@ body.menu-open {
             align-items: start;
         }
 
-        .footer-logo .logo-text { font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; display: block; line-height: 1; }
+        .footer-logo .logo-text { font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; display: block; line-height: 1.7; }
         .footer-logo .logo-subtext { font-size: 10px; letter-spacing: 2px; opacity: 0.9; text-transform: uppercase; }
         .footer-tagline { font-size: 14px; margin: 20px 0; line-height: 1.6; max-width: 300px; opacity: 0.9; }
 
@@ -781,7 +801,7 @@ body.show-chatbot .chatbot {
             <a href="index.html" class="card-link">
                 <span class="material-symbols-outlined">home</span>Accueil
             </a>
-            <a href="donut.html" class="card-link">
+            <a href="donut.html" class="card-link"style="background: var(--accent-pink); color: white; margin-top: 5px;">
                 <span class="material-symbols-outlined">restaurant_menu</span>La Carte
             </a>
             <a href="panier.html" class="card-link">
@@ -794,7 +814,11 @@ body.show-chatbot .chatbot {
                 <span class="material-symbols-outlined">celebration</span>Evènement
             </a>
 
-            <a href="#" class="card-link" style="background: var(--accent-pink); color: white; justify-content: center; margin-top: 10px;">
+              <a href="favoris.html" class="card-link">
+                <span class="material-symbols-outlined">favorite</span>Favoris
+            </a>
+
+            <a href="#" class="card-link" >
                 <span class="material-symbols-outlined">shopping_cart_checkout</span>Commander
             </a>
         </div>
@@ -806,10 +830,13 @@ body.show-chatbot .chatbot {
             <span class="material-symbols-outlined menu-trigger" id="openBtn">menu</span>
         </div>
         
-        <div class="logo-center">
-            <span class="logo-text">ChezBiskuit</span>
-            <span class="logo-subtext">Donuts + Café</span>
-        </div>
+         <div class="logo-center">
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+        <!-- Remplacement de ChezBiskuit pour matcher exactement l'image -->
+        <span class="logo-text" style="line-height: 1.7;">B<span>!</span>SKU<span>i</span>T</span>
+        <span class="logo-subtext">HAUTE BEIGNETERIE</span>
+    </a>
+</div>
 
         <div class="nav-right">
             <a href="favoris.html"><span class="material-symbols-outlined desktop-only" style="color: #1A1A1A;">favorite</span></a>  
@@ -990,13 +1017,16 @@ body.show-chatbot .chatbot {
             
             <div class="footer-col branding">
                 <div class="footer-logo">
-                    <span class="logo-text">Chez Biskuit</span>
+ <a href="index.html" style="text-decoration: none; color: inherit;">
+        <!-- Remplacement de ChezBiskuit pour matcher exactement l'image -->
+        <span class="logo-text" style="line-height: 1.7;">B<span>!</span>SKU<span>i</span>T</span>
+    </a>
                     <span class="logo-subtext">HAUTE BEIGNETERIE</span>
                 </div>
                 <p class="footer-tagline">L'art du donut artisanal, façonné à la main chaque matin pour vos moments d'exception.</p>
                 <div class="footer-socials">
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/biskuit_conflans/reels/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@homedonutsconflans" class="social-link"><i class="fab fa-tiktok"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-snapchat"></i></a>
                 </div>
             </div>
@@ -1016,15 +1046,15 @@ body.show-chatbot .chatbot {
                 <div class="contact-info">
                     <div class="info-item">
                         <span class="material-symbols-outlined">location_on</span>
-                        <p>123 Rue du Glaçage, Paris</p>
+                        <p>42 Av. Carnot, Conflans-Sainte-Honorine</p>
                     </div>
                     <div class="info-item">
                         <span class="material-symbols-outlined">schedule</span>
-                        <p>Lun - Sam : 09h00 - 19h30</p>
+                        <p>Mar - Dim : 10h00 - 19h00</p>
                     </div>
                     <div class="info-item">
                         <span class="material-symbols-outlined">mail</span>
-                        <p>bonjour@homedonut.fr</p>
+                        <p>bonjour@Chez Biscuit.fr</p>
                     </div>
                 </div>
             </div>
@@ -1043,7 +1073,7 @@ body.show-chatbot .chatbot {
         </div>
 
         <div class="footer-bottom">
-            <p>© 2026 Homedonut. Créé avec passion.</p>
+            <p>© 2026 Chez Biscuit. Créé avec passion.</p>
             <div class="footer-legal">
                 <a href="#">CGV</a>
                 <a href="#">Politique de cookies</a>
@@ -1060,12 +1090,12 @@ body.show-chatbot .chatbot {
 
 <div class="chatbot">
     <header>
-        <h2>Homedonut AI</h2>
+        <h2>Chez Biscuit</h2>
         <p>En ligne • Prêt à vous régaler</p>
     </header>
     <ul class="chatbox">
         <li class="chat incoming">
-            <p>Bonjour ! Je suis votre assistant gourmet. Quelle douceur vous ferait plaisir aujourd'hui ? 🍩</p>
+            <p>Bonjour ! Je suis votre assistant gourmet. Quelle douceur vous ferait plaisir aujourd'hui ? </p>
         </li>
     </ul>
     <div class="chat-input">

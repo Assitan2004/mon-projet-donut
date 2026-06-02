@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription | ChezBiskuit</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Mes Favoris | ChezBiskuit</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
@@ -11,39 +12,32 @@
     <style>
         :root {
             --accent-pink: #f43484; 
-            --btn-dark: #1a1a1a;
             --text-dark: #1A1A1A;
-            --input-border: #e2e8f0;
-            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            --chat-gradient: linear-gradient(135deg, #f43484 0%, #ff7eb3 100%);
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --border-soft: #f1f5f9;
+            --text-muted: #888888;
             --white: #ffffff;
+            --bg-light: #F9F9F9;
+            --border-color: #E8E8E8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #fff;
+            background-color: #ffffff;
             color: var(--text-dark);
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
         /* --- NAVIGATION --- */
         .navbar {
-            padding: 1.2rem 0;
-            background: rgba(255, 255, 255, 0.85);
+            padding: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            position: fixed;
+            position: sticky;
             top: 0;
-            width: 100%;
             z-index: 1000;
-            border-bottom: 1px solid var(--border-soft);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .nav-container {
@@ -55,13 +49,10 @@
             padding: 0 2rem;
         }
 
-        .nav-left { min-width: 80px; display: flex; align-items: center; }
-
         .logo-center { 
             text-align: center; 
             color: inherit; 
             flex: 2;
-            text-decoration: none;
         }
 
         .logo-text { 
@@ -80,10 +71,11 @@
 
         .logo-subtext { font-size: 10px; letter-spacing: 4px; display: block; opacity: 0.5; font-weight: 700; margin-top: -4px; }
 
+        .nav-left { min-width: 80px; }
         .nav-right { display: flex; gap: 24px; align-items: center; color: var(--text-dark); min-width: 80px; justify-content: flex-end; }
         .nav-right a { color: inherit; text-decoration: none; display: flex; align-items: center; }
         .nav-right span { cursor: pointer; font-variation-settings: 'wght' 300; transition: 0.3s; }
-        .nav-right span:hover { color: var(--accent-pink); }
+        .nav-right span:hover, .nav-right a.active span { color: var(--accent-pink); }
 
         .menu-trigger {
             cursor: pointer;
@@ -94,11 +86,171 @@
             display: block;
         }
 
-        @media (max-width: 768px) {
-            .desktop-only { display: none !important; }
+        /* --- HEADER --- */
+        .fav-header {
+            text-align: center;
+            padding: 1rem 1rem 2rem;
         }
 
-        /* --- OVERLAY --- */
+        .fav-header h1 {
+            font-weight: 800;
+            font-size: clamp(2rem, 7vw, 3rem);
+            letter-spacing: -2px;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .fav-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* --- GRID PRODUITS --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 100px 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 4rem 2rem 10rem;
+        }
+
+        .product-card {
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            background: #FFF; 
+            border-radius: 24px;
+            border: 1px solid white;
+        }
+
+        .product-image {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .product-card:hover .product-image { transform: scale(1.1) translateY(-10px); }
+
+        .remove-fav-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            color: var(--accent-pink); 
+            transition: 0.3s;
+        }
+
+        .remove-fav-btn:hover { color: var(--text-dark); transform: scale(1.05); }
+
+        .product-card h3 {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 2px;
+        }
+
+        .product-price {
+            font-weight: 800;
+            color: var(--accent-pink);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            max-width: 260px;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .add-to-cart {
+            background: var(--text-dark);
+            border: none;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 100px;
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .add-to-cart:hover { background: var(--accent-pink); transform: translateY(-3px); }
+
+        /* Message vide */
+        .empty-favorites {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 0;
+        }
+        .empty-favorites span { font-size: 4rem; color: #ccc; margin-bottom: 1rem; }
+        .empty-favorites p { color: var(--text-muted); margin-bottom: 2rem; }
+        .shop-now-btn {
+            display: inline-block;
+            background: var(--text-dark);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .shop-now-btn:hover { background: var(--accent-pink); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1100px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 60px 20px; }
+        }
+
+        @media (max-width: 650px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .fav-header h1 { font-size: 1.8rem; }
+            .add-to-cart { width: 90%; justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .desktop-only { display: none !important; }
+            .nav-container { padding: 0 1rem; }
+            .logo-text { font-size: 1.2rem; }
+        }
+
+        /* --- MENU DRAWER --- */
         .nav-overlay {
             position: fixed;
             inset: 0;
@@ -115,10 +267,9 @@
             pointer-events: auto;
         }
 
-        /* --- MOBILE DRAWER --- */
         .mobile-nav-card {
             position: fixed;
-            top: 80px;
+            top: 80px; 
             left: 20px;
             width: 260px;
             background: var(--white);
@@ -132,17 +283,20 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
+
         .mobile-nav-card.active {
             opacity: 1;
             pointer-events: auto;
             transform: translateY(0) scale(1);
         }
+
         .card-inner { display: flex; flex-direction: column; gap: 2px; }
-        .card-link { 
+
+        .card-link {
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 600;
-            font-size: 15px;
+            font-size: 0.9rem;
             padding: 14px 16px;
             border-radius: 12px;
             display: flex;
@@ -150,88 +304,35 @@
             gap: 14px;
             transition: background 0.2s, color 0.2s;
         }
+
         .card-link .material-symbols-outlined {
             font-size: 21px;
             color: var(--text-dark);
             transition: color 0.2s;
         }
+
         .card-link-cta {
             background: var(--accent-pink); 
             color: white; 
             margin-top: 3px;
         }
-        .card-link-cta .material-symbols-outlined { color: white !important; }
-        .card-link-cta:hover { background: #d42070 !important; color: white !important; }
 
-        /* --- FORMULAIRE --- */
-        .login-wrapper {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 140px 20px 80px;
+        .card-link-cta .material-symbols-outlined {
+            color: white !important;
         }
 
-        .login-card {
-            width: 100%;
-            max-width: 440px;
-            text-align: center;
-        }
-
-        .main-title {
-            font-size: 48px;
-            font-weight: 500;
-            letter-spacing: -1px;
-            margin-bottom: 50px;
-            color: #000;
-        }
-
-        .form-group { margin-bottom: 16px; }
-
-        input {
-            width: 100%;
-            padding: 20px 24px;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 16px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: 0.2s;
-        }
-
-        input:focus { border-color: var(--accent-pink); box-shadow: 0 0 0 4px rgba(244, 52, 132, 0.05); }
-
-        .btn-submit {
-            width: 100%;
-            background-color: var(--btn-dark);
-            color: #ffffff;
-            border: none;
-            padding: 20px;
-            border-radius: 12px;
-            font-size: 17px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 20px;
-            margin-bottom: 30px;
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-
-        .footer-link { 
-            font-size: 16px; 
-            color: var(--text-dark); 
-            text-decoration: none; 
-            border-bottom: 1px solid var(--text-dark);
-            padding-bottom: 2px;
+        .card-link-cta:hover {
+            background: #d42070 !important;
+            color: white !important;
         }
 
         /* --- FOOTER --- */
         .site-footer {
-            background-color: var(--accent-pink);
+            background-color: #f43484; 
             color: #ffffff;
             padding: 80px 0 40px;
             font-family: 'Inter', sans-serif;
+            margin-top: 50px;
         }
 
         .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
@@ -277,7 +378,9 @@
         .footer-legal a { color: #fff; text-decoration: none; margin-left: 20px; opacity: 0.8; }
         .footer-legal a:hover { opacity: 1; }
 
-        @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 50px; } }
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 50px; }
+        }
         @media (max-width: 768px) {
             .site-footer { padding: 60px 0 30px; }
             .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
@@ -289,55 +392,6 @@
             .footer-legal { display: flex; flex-direction: column; gap: 10px; }
             .footer-legal a { margin: 0; }
         }
-
-        /* --- CHATBOT --- */
-        .chatbot-toggler {
-            position: fixed;
-            bottom: 35px; right: 35px;
-            height: 65px; width: 65px;
-            color: #fff;
-            background: var(--chat-gradient);
-            border: none;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 22px;
-            cursor: pointer;
-            box-shadow: 0 15px 35px rgba(244, 52, 132, 0.3);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 3000;
-        }
-        .chatbot-toggler:hover { transform: translateY(-5px) rotate(8deg); box-shadow: 0 20px 40px rgba(244, 52, 132, 0.4); }
-
-        .chatbot {
-            position: fixed;
-            right: 35px; bottom: 120px;
-            width: 400px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 30px;
-            overflow: hidden;
-            opacity: 0; pointer-events: none;
-            transform: translateY(40px) scale(0.8);
-            transform-origin: bottom right;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 3000;
-        }
-        body.show-chatbot .chatbot { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
-        .chatbot header { background: var(--chat-gradient); padding: 25px; color: #fff; }
-        .chatbot header h2 { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.5px; }
-        .chatbot header p { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
-        .chatbot .chatbox { height: 450px; overflow-y: auto; padding: 25px; list-style: none; }
-        .chatbox .chat { display: flex; }
-        .chatbox .chat p { padding: 14px 18px; font-size: 0.95rem; line-height: 1.5; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
-        .chatbox .outgoing { justify-content: flex-end; margin: 20px 0; }
-        .chatbox .outgoing p { background: var(--chat-gradient); color: #fff; border-radius: 22px 22px 4px 22px; }
-        .chatbox .incoming p { background: #fff; color: var(--text-dark); border-radius: 22px 22px 22px 4px; }
-        .chatbot .chat-input { display: flex; padding: 20px 25px; background: #fff; border-top: 1px solid rgba(0,0,0,0.05); align-items: center; gap: 15px; }
-        .chat-input textarea { height: 24px; width: 100%; border: none; outline: none; resize: none; font-family: inherit; background: transparent; font-size: 0.95rem; }
-        #send-btn { color: var(--accent-pink); cursor: pointer; transition: 0.3s; }
-        #send-btn:hover { transform: scale(1.2) rotate(-10deg); }
     </style>
 </head>
 <body>
@@ -345,63 +399,63 @@
 <!-- OVERLAY -->
 <div class="nav-overlay" id="navOverlay"></div>
 
-<!-- MOBILE DRAWER -->
 <div id="mobileDrawer" class="mobile-nav-card">
     <div class="card-inner">
-        <a href="index.html" class="card-link"><span class="material-symbols-outlined">home</span>Accueil</a>
-        <a href="donut.html" class="card-link"><span class="material-symbols-outlined">restaurant_menu</span>La Carte</a>
-        <a href="panier.html" class="card-link"><span class="material-symbols-outlined">shopping_bag</span>Mon Panier</a>
-        <a href="histoire.html" class="card-link"><span class="material-symbols-outlined">history_edu</span>Histoire</a>
-        <a href="evenement.html" class="card-link"><span class="material-symbols-outlined">celebration</span>Evènement</a>
-        <a href="favoris.html" class="card-link"><span class="material-symbols-outlined">favorite</span>Favoris</a>
-        <a href="#" class="card-link card-link-cta"><span class="material-symbols-outlined">shopping_cart_checkout</span>Commander</a>
+        <a href="index.html" class="card-link">
+            <span class="material-symbols-outlined">home</span>Accueil
+        </a>
+        <a href="donut.html" class="card-link">
+            <span class="material-symbols-outlined">restaurant_menu</span>La Carte
+        </a>
+        <a href="panier.html" class="card-link">
+            <span class="material-symbols-outlined">shopping_bag</span>Mon Panier
+        </a>
+        <a href="histoire.html" class="card-link">
+            <span class="material-symbols-outlined">history_edu</span>Histoire
+        </a>
+        <a href="evenement.html" class="card-link">
+            <span class="material-symbols-outlined">celebration</span>Evènement
+        </a>
+        <a href="favoris.html" class="card-link card-link-cta">
+            <span class="material-symbols-outlined">favorite</span>Mes Favoris
+        </a>
+        <a href="#" class="card-link">
+            <span class="material-symbols-outlined">shopping_cart_checkout</span>Commander
+        </a>
     </div>
 </div>
 
-<!-- NAVBAR -->
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-left">
             <span class="material-symbols-outlined menu-trigger" id="openBtn">menu</span>
         </div>
+        
         <div class="logo-center">
             <a href="index.html" style="text-decoration: none; color: inherit;">
                 <span class="logo-text" style="line-height: 1.7;">B<span>!</span>SKU<span>i</span>T</span>
                 <span class="logo-subtext">HAUTE BEIGNETERIE</span>
             </a>
         </div>
+
         <div class="nav-right">
-            <a href="favoris.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">favorite</span></a>
-            <a href="panier.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">shopping_bag</span></a>
-            <a href="connexion.html" style="color: inherit;"><span class="material-symbols-outlined">person</span></a>
+            <a href="favoris.html" class="desktop-only active"><span class="material-symbols-outlined">favorite</span></a>
+            <a href="panier.html" class="desktop-only"><span class="material-symbols-outlined">shopping_bag</span></a>
+            <a href="connexion.html" id="userBtn"><span class="material-symbols-outlined">person</span></a>
         </div>
     </div>
 </nav>
 
-<!-- FORMULAIRE INSCRIPTION -->
-<div class="login-wrapper">
-    <div class="login-card">
-        <h1 class="main-title">Inscription</h1>
-        <form>
-            <div class="form-group"><input type="text" placeholder="Prénom" required></div>
-            <div class="form-group"><input type="text" placeholder="Nom" required></div>
-            <div class="form-group"><input type="email" placeholder="Email" required></div>
-            <div class="form-group"><input type="password" placeholder="Mot de passe" required></div>
-            <button type="submit" class="btn-submit">Créer le compte</button>
-        </form>
-        <div class="form-footer">
-            <a href="connexion.html" class="footer-link">Se connecter</a>
-        </div>
-    </div>
-</div>
 
-<!-- FOOTER -->
+<main class="product-grid" id="favorites-grid">
+</main>
+
 <footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
-            
             <div class="footer-col branding">
                 <div class="footer-logo">
+
                      <a href="index.html" style="text-decoration: none; color: inherit;">
         <!-- Remplacement de ChezBiskuit pour matcher exactement l'image -->
         <span class="logo-text" style="line-height: 1.7;">B<span>!</span>SKU<span>i</span>T</span>
@@ -449,14 +503,15 @@
                 <p class="news-text">Rejoignez le club pour recevoir nos créations éphémères en avant-première.</p>
                 <div class="newsletter-group">
                     <input type="email" placeholder="Votre adresse mail..." class="news-input">
-                    <button class="news-btn"><span class="material-symbols-outlined">send</span></button>
+                    <button class="news-btn">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
                 </div>
             </div>
-
         </div>
 
         <div class="footer-bottom">
-            <p>© 2026 Chez Biscuit. Créé avec passion.</p>
+            <p>© 2026 Chez B!SKUiT. Créé avec passion.</p>
             <div class="footer-legal">
                 <a href="#">CGV</a>
                 <a href="#">Politique de cookies</a>
@@ -465,28 +520,6 @@
         </div>
     </div>
 </footer>
-
-<!-- CHATBOT -->
-<button class="chatbot-toggler">
-    <span class="material-symbols-outlined icon-chat">auto_awesome</span>
-    <span class="material-symbols-outlined icon-close" style="display:none;">close</span>
-</button>
-
-<div class="chatbot">
-    <header>
-        <h2>Chez Biscuit</h2>
-        <p>En ligne • Prêt à vous régaler</p>
-    </header>
-    <ul class="chatbox">
-        <li class="chat incoming">
-            <p>Bonjour ! Je suis votre assistant gourmet. Quelle douceur vous ferait plaisir aujourd'hui ?</p>
-        </li>
-    </ul>
-    <div class="chat-input">
-        <textarea placeholder="Posez votre question..." required></textarea>
-        <span id="send-btn" class="material-symbols-outlined">send</span>
-    </div>
-</div>
 
 <script>
     // ---- MENU MOBILE ----
@@ -519,89 +552,94 @@
         if (e.key === 'Escape') closeDrawer();
     });
 
-    // ---- INSCRIPTION API FORMULAIRE ----
-    document.querySelector("form").addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const inputs = document.querySelectorAll("input");
-        const prenom = inputs[0].value.trim();
-        const nom = inputs[1].value.trim();
-        const email = inputs[2].value.trim();
-        const mot_de_passe = inputs[3].value.trim();
-
-        try {
-            const res = await fetch("http://127.0.0.1:5000/auth/inscription", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ prenom, nom, email, mot_de_passe })
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                alert("✅ Compte créé ! Vous pouvez vous connecter.");
-                window.location.href = "connexion.html";
-            } else {
-                alert("❌ " + data.erreur);
-            }
-        } catch (err) {
-            alert("❌ Impossible de contacter le serveur. Flask est-il lancé ?");
+    // ---- LISTE DES DONUTS EN BRUT (FRONT ONLY) ----
+    let donutsList = [
+        {
+            id: 1,
+            nom: "L'Original O.G.",
+            prix: 4.50,
+            image: "image/d2.jpg",
+            description: "Notre inimitable glaçage Orxata Signature."
+        },
+        {
+            id: 2,
+            nom: "Choco Loco",
+            prix: 5.50,
+            image: "image/d8.jpg",
+            description: "Édition Saisonnière aux éclats de myrtilles sauvages."
+        },
+        {
+            id: 3,
+            nom: "Choco Loco",
+            prix: 5.50,
+            image: "image/d9_modifie.png",
+            description: "Chocolat noir intense et pépites craquantes."
         }
+    ];
+
+    // ---- LOGIQUE DYNAMIQUE DES FAVORIS ----
+    document.addEventListener("DOMContentLoaded", () => {
+        afficherFavoris();
     });
 
-    // ---- CHATBOT ----
-    document.addEventListener('DOMContentLoaded', () => {
-        const chatbotToggler = document.querySelector(".chatbot-toggler");
-        const iconChat = document.querySelector(".icon-chat");
-        const iconClose = document.querySelector(".icon-close");
-        const chatInput = document.querySelector(".chat-input textarea");
-        const sendChatBtn = document.querySelector("#send-btn");
-        const chatbox = document.querySelector(".chatbox");
+    function afficherFavoris() {
+        const grid = document.getElementById("favorites-grid");
 
-        chatbotToggler.addEventListener("click", () => {
-            document.body.classList.toggle("show-chatbot");
-            if (document.body.classList.contains("show-chatbot")) {
-                iconChat.style.display = "none";
-                iconClose.style.display = "block";
-            } else {
-                iconChat.style.display = "block";
-                iconClose.style.display = "none";
-            }
+        if (donutsList.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-favorites">
+                    <span class="material-symbols-outlined" style="font-size:4rem; color:var(--accent-pink); margin-bottom:15px;">favorite_border</span>
+                    <p style="font-weight:600; margin-bottom:20px;">Votre liste de coups de cœur est vide.</p>
+                    <a href="donut.html" class="shop-now-btn">Découvrir la carte</a>
+                </div>
+            `;
+            return;
+        }
+
+        grid.innerHTML = "";
+        donutsList.forEach(produit => {
+            grid.innerHTML += `
+                <div class="product-card" id="fav-card-${produit.id}">
+                    <div class="image-container">
+                        <button class="remove-fav-btn" onclick="retirerDesFavoris(${produit.id})">
+                            <span class="material-symbols-outlined">favorite</span>
+                        </button>
+                        <img src="${produit.image}" class="product-image" alt="${produit.nom}">
+                    </div>
+                    <h3>${produit.nom}</h3>
+                    <div class="product-price">${parseFloat(produit.prix).toFixed(2)}€</div>
+                    <p class="product-desc">${produit.description || 'Une douceur artisanale irrésistible.'}</p>
+                    <button class="add-to-cart" onclick="ajouterAuPanier(${produit.id}, '${produit.nom}')">
+                        <span class="material-symbols-outlined" style="font-size: 1.2rem;">add</span>
+                        Ajouter
+                    </button>
+                </div>
+            `;
         });
+    }
 
-        const createChatLi = (message, className) => {
-            const chatLi = document.createElement("li");
-            chatLi.classList.add("chat", className);
-            chatLi.innerHTML = `<p>${message}</p>`;
-            return chatLi;
-        };
+    function retirerDesFavoris(id) {
+        donutsList = donutsList.filter(item => item.id !== id);
+        afficherFavoris();
+        toastNotification("💔 Retiré des favoris");
+    }
 
-        const handleChat = () => {
-            const userMessage = chatInput.value.trim();
-            if (!userMessage) return;
-            chatInput.value = "";
-            chatbox.appendChild(createChatLi(userMessage, "outgoing"));
-            chatbox.scrollTo(0, chatbox.scrollHeight);
+    function ajouterAuPanier(id, nom) {
+        toastNotification(`✅ ${nom} ajouté au panier !`);
+    }
 
-            setTimeout(() => {
-                const incomingChatLi = createChatLi("Je prépare votre réponse... ✨", "incoming");
-                chatbox.appendChild(incomingChatLi);
-                chatbox.scrollTo(0, chatbox.scrollHeight);
-                setTimeout(() => {
-                    incomingChatLi.querySelector("p").textContent = "C'est noté ! Un de nos chefs pâtissiers va vous répondre d'ici quelques instants. En attendant, nos donuts Mms sont en promotion ! 🍩";
-                    chatbox.scrollTo(0, chatbox.scrollHeight);
-                }, 1000);
-            }, 500);
-        };
-
-        sendChatBtn.addEventListener("click", handleChat);
-        chatInput.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleChat();
-            }
-        });
-    });
+    function toastNotification(texte) {
+        const msg = document.createElement("div");
+        msg.textContent = texte;
+        msg.style.cssText = `
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: #1A1A1A; color: white; padding: 14px 28px;
+            border-radius: 100px; font-weight: 700; font-size: 0.85rem;
+            z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        `;
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 2500);
+    }
 </script>
 </body>
 </html>
