@@ -173,6 +173,7 @@
             font-size: 1.4rem;
             letter-spacing: -0.5px;
             margin-bottom: 2px;
+
         }
 
         .product-price {
@@ -184,7 +185,7 @@
 
         .product-desc {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: #1A1A1A;
             max-width: 260px;
             margin-bottom: 24px;
             font-weight: 400;
@@ -566,13 +567,13 @@
             nom: "Choco Loco",
             prix: 5.50,
             image: "image/d8.jpg",
-            description: "Édition Saisonnière aux éclats de myrtilles sauvages."
+            description: "Édition Saisonnière aux éclats de myrtilles."
         },
         {
             id: 3,
             nom: "Choco Loco",
             prix: 5.50,
-            image: "image/d9_modifie.png",
+            image: "image/d7_modifie.png",
             description: "Chocolat noir intense et pépites craquantes."
         }
     ];
@@ -601,9 +602,7 @@
             grid.innerHTML += `
                 <div class="product-card" id="fav-card-${produit.id}">
                     <div class="image-container">
-                        <button class="remove-fav-btn" onclick="retirerDesFavoris(${produit.id})">
-                            <span class="material-symbols-outlined">favorite</span>
-                        </button>
+                       
                         <img src="${produit.image}" class="product-image" alt="${produit.nom}">
                     </div>
                     <h3>${produit.nom}</h3>

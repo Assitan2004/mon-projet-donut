@@ -79,15 +79,8 @@
             display: inline-block;
         }
 
-        .logo-subtext { 
-            font-size: 10px; 
-            letter-spacing: 4px; 
-            display: block; 
-            opacity: 0.6; 
-            font-weight: 700; 
-            margin-top: -4px; 
-            text-transform: uppercase; 
-        }
+      
+                   .logo-subtext { font-size: 10px; letter-spacing: 4px; display: block; opacity: 0.5; font-weight: 700; margin-top: -4px; }
 
         .nav-right { display: flex; gap: 24px; align-items: center; color: var(--text-dark); min-width: 80px; justify-content: flex-end; }
         .nav-right a { color: inherit; text-decoration: none; display: flex; align-items: center; }
@@ -370,12 +363,15 @@
         <div class="nav-left">
             <span class="material-symbols-outlined menu-trigger" id="openBtn">menu</span>
         </div>
-        <div class="logo-center">
-            <a href="index.html" style="text-decoration: none; color: inherit;">
-                <span class="logo-text" style="line-height: 1.7;">B<span>!</span>SKU<span>i</span>T</span>
-                <span class="logo-subtext">HAUTE BEIGNETERIE</span>
-            </a>
-        </div>
+        
+  <div class="logo-center">
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+        <!-- Remplacement de ChezBiskuit pour matcher exactement l'image -->
+        <span class="logo-text" style="line-height: 1.7;">B<span>!</span>SKU<span>i</span>T</span>
+        <span class="logo-subtext">HAUTE BEIGNETERIE</span>
+    </a>
+</div>
+
         <div class="nav-right">
             <a href="favoris.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">favorite</span></a>
             <a href="panier.html" class="desktop-only" style="color: inherit;"><span class="material-symbols-outlined">shopping_bag</span></a>
@@ -469,26 +465,7 @@
     </div>
 </footer>
 
-<button class="chatbot-toggler">
-    <span class="material-symbols-outlined icon-chat">auto_awesome</span>
-    <span class="material-symbols-outlined icon-close" style="display:none;">close</span>
-</button>
 
-<div class="chatbot">
-    <header>
-        <h2>Chez Biscuit</h2>
-        <p>En ligne • Prêt à vous régaler</p>
-    </header>
-    <ul class="chatbox">
-        <li class="chat incoming">
-            <p>Bonjour ! Je suis votre assistant gourmet. Quelle douceur vous ferait plaisir aujourd'hui ?</p>
-        </li>
-    </ul>
-    <div class="chat-input">
-        <textarea placeholder="Posez votre question..." required></textarea>
-        <span id="send-btn" class="material-symbols-outlined">send</span>
-    </div>
-</div>
 
 <script>
     // ---- MENU MOBILE ----
